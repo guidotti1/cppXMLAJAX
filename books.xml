@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library>
+  <book isbn10="1234567890" isbn13="1234567890123">
+    <title>XML for Kenyon</title>
+    <author fname="james" lname="skon">James Skon</author>
+    <publisher>Kenyon Review</publisher>
+    <price>1.99</price>
+  </book>
+  <book isbn10="8957468873" isbn13="0984837828189">
+    <title>C++ on the hill</title>
+    <author fname="noah" lname="aydin">Noah Aydin</author>
+    <publisher>Kenyon Review</publisher>
+    <price>2.99</price>
+  </book>
+  <book isbn10="43567566765" isbn13="0984837828189">
+    <title>Physics Today</title>
+    <author fname="christian" lname="solorio">Christian Solorio</author>
+    <publisher>Solorio Books</publisher>
+    <price>133.99</price>
+  </book>
+  <book isbn10="3456543456" isbn13="0984837828189">
+    <title>The Land of Molecules</title>
+    <author fname="preston" lname="basting">Preston Basting</author>
+    <publisher>PrestoBooks</publisher>
+    <price>399.99</price>
+  </book>
+  <book isbn10="8789656789" isbn13="0984837828189">
+    <title>Sociology in a Nutshell</title>
+    <author fname="juvi" lname="riveri">Juvi Riveri</author>
+    <publisher>Best Books</publisher>
+    <price>56.99</price>
+  </book>
+</library>
