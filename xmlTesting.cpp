@@ -94,7 +94,7 @@ int main (int argc, char ** argv) {
     string objectCondition = objectConditionNode.getText();
 
     XMLNode ownerConditionNode = triggerConditionNode.getChildNode("owner");
-    string ownerCondtion = ownerConditionNode.getText();
+    string ownerCondition = ownerConditionNode.getText();
 
     cout << "(trigger condition:)" << endl;
     cout << "has : " << hasCondition << endl;
