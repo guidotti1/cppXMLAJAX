@@ -92,56 +92,64 @@ int main (int argc, char ** argv) {
     XMLNode triggerNode=roomNode.getChildNode("trigger");
     string triggerType, command, triggerPrint = "";
 
-    XMLNode typeNode = triggerNode.getChildNode("type");
-    if (!typeNode.isEmpty())
+    if (!triggerNode.isEmpty())
         {
-        triggerType = typeNode.getText();
+            XMLNode typeNode = triggerNode.getChildNode("type");
+            if (!typeNode.isEmpty())
+                {
+                triggerType = typeNode.getText();
+                }
+
+            XMLNode commandNode = triggerNode.getChildNode("command");
+                if (!commandNode.isEmpty())
+                {
+                command = commandNode.getText();
+                }
+
+            XMLNode printNode = triggerNode.getChildNode("print");
+                if (!printNode.isEmpty())
+                {
+                triggerPrint = printNode.getText();
+                }
+
+            cout << "(trigger information)" << endl;
+            cout << "type : " << triggerType << endl;
+            cout << "command : " << command << endl;
+            cout << "print : " << triggerPrint << endl;
+
+            XMLNode triggerConditionNode = triggerNode.getChildNode("condition");
+            if (!triggerConditionNode.isEmpty())
+                {
+                    string hasCondition, objectCondition, ownerCondition = "";
+
+                    XMLNode hasConditionNode = triggerConditionNode.getChildNode("has");
+                    if (!hasConditionNode.isEmpty())
+                        {
+                        hasCondition = hasConditionNode.getText();
+                        }
+
+                    XMLNode objectConditionNode = triggerConditionNode.getChildNode("object");
+                    if (!objectConditionNode.isEmpty())
+                        {
+                        objectCondition = objectConditionNode.getText();
+                        }
+
+                    XMLNode ownerConditionNode = triggerConditionNode.getChildNode("owner");
+                    if (!ownerConditionNode.isEmpty())
+                        {
+                        ownerCondition = ownerConditionNode.getText();
+                        }
+
+
+                    cout << "(trigger condition information)" << endl;
+                    cout << "has : " << hasCondition << endl;
+                    cout << "object : " << objectCondition << endl;
+                    cout << "owner : " << ownerCondition << endl;
+                }
         }
 
-    XMLNode commandNode = triggerNode.getChildNode("command");
-    if (!commandNode.isEmpty())
-        {
-        command = commandNode.getText();
-        }
-
-    XMLNode printNode = triggerNode.getChildNode("print");
-    if (!printNode.isEmpty())
-        {
-        triggerPrint = printNode.getText();
-        }
-
-    cout << "(trigger information)" << endl;
-    cout << "type : " << triggerType << endl;
-    cout << "command : " << command << endl;
-    cout << "print : " << triggerPrint << endl;
 
 
-    XMLNode triggerConditionNode = triggerNode.getChildNode("condition");
-    string hasCondition, objectCondition, ownerCondition = "";
-
-    XMLNode hasConditionNode = triggerConditionNode.getChildNode("has");
-    if (!hasConditionNode.isEmpty())
-        {
-        hasCondition = hasConditionNode.getText();
-        }
-
-    XMLNode objectConditionNode = triggerConditionNode.getChildNode("object");
-    if (!objectConditionNode.isEmpty())
-        {
-        objectCondition = objectConditionNode.getText();
-        }
-
-    XMLNode ownerConditionNode = triggerConditionNode.getChildNode("owner");
-    if (!ownerConditionNode.isEmpty())
-        {
-        ownerCondition = ownerConditionNode.getText();
-        }
-
-
-    cout << "(trigger condition information)" << endl;
-    cout << "has : " << hasCondition << endl;
-    cout << "object : " << objectCondition << endl;
-    cout << "owner : " << ownerCondition << endl;
 
     //cout << "Item in the room : " << itemName << endl;
     //cout << "Item2 name : " << item2Name << endl;
