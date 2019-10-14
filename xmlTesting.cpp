@@ -60,6 +60,10 @@ int main (int argc, char ** argv) {
 
     XMLNode itemNode = roomNode.getChildNode("item");
     string itemName = itemNode.getText();
+    
+    XML item2Node = roomNode.getChildNode("item");
+    string item2Name = item2Node.getText();
+    
 
     /*
     string lname = authorNode.getAttribute("lname");
@@ -89,6 +93,7 @@ int main (int argc, char ** argv) {
     cout << "Name of the room is : " << name << endl;
     cout << "Description of the room is : " << description << endl;
     cout << "Item in the room : " << itemName << endl;
+    cout << "Item2 name : " << item2Name << endl;
     roomNode=xMainNode.getChildNode(i++);
   } while (!roomNode.isEmpty());
 
