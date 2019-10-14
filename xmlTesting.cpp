@@ -52,13 +52,33 @@ int main (int argc, char ** argv) {
 
     //XMLNode emptyNode = emptyNode();
     do {
+    string roomType, name, description = "";
+
+    //room type
+    XMLNode roomTypeNode = roomNode.getChildNode("type");
+    if (!roomTypeNode.isEmpty())
+        {
+        roomType = roomTypeNode.getText();
+        }
+
     // Get the room name
     XMLNode nameNode = roomNode.getChildNode("name");
-    string name = nameNode.getText();
+    if (!nameNode.isEmpty())
+        {
+        name = nameNode.getText();
+        }
 
     //Get the room description
     XMLNode descriptionNode = roomNode.getChildNode("description");
-    string description = descriptionNode.getText();
+    if (!descriptionNode.isEmpty())
+        {
+        description = descriptionNode.getText();
+        }
+
+    cout << "(room information)" << endl;
+    cout << "Name of the room is : " << name << endl;
+    cout << "Description of the room is : " << description << endl;
+    cout << "Type of the room is : " <<  roomType << endl;
 
     /*
     XMLNode itemNode = roomNode.getChildNode("item");
@@ -68,29 +88,37 @@ int main (int argc, char ** argv) {
     string item2Name = item2Node.getText();
     */
 
-    //XMLNode triggerNode = roomNode.getChildNode("trigger");
-    //int j = 0;
+
     XMLNode triggerNode=roomNode.getChildNode("trigger");
-    //do
-       // {
+    string triggerType, command, triggerPrint = "";
+
     XMLNode typeNode = triggerNode.getChildNode("type");
-    string type = typeNode.getText();
+    if (!typeNode.isEmpty())
+        {
+        triggerType = typeNode.getText();
+        }
 
     XMLNode commandNode = triggerNode.getChildNode("command");
-    string command = commandNode.getText();
+    if (!commandNode.isEmpty())
+        {
+        command = commandNode.getText();
+        }
 
     XMLNode printNode = triggerNode.getChildNode("print");
-    string print = printNode.getText();
+    if (!printNode.isEmpty())
+        {
+        triggerPrint = printNode.getText();
+        }
 
-
-    cout << "(trigger:)" << endl;
-    cout << "type : " << type << endl;
-    cout << "command : " << command << endl;
-    cout << "print : " << print << endl;
+    cout << "(trigger information)" << endl;
+    cout << "type : " << triggerType << endl;
+    cout << "command : " << comand << endl;
+    cout << "print : " << triggerPrint << endl;
 
 
     XMLNode triggerConditionNode = triggerNode.getChildNode("condition");
     string hasCondition, objectCondition, ownerCondition = "";
+
     XMLNode hasConditionNode = triggerConditionNode.getChildNode("has");
     if (!hasConditionNode.isEmpty())
         {
@@ -103,7 +131,6 @@ int main (int argc, char ** argv) {
         objectCondition = objectConditionNode.getText();
         }
 
-
     XMLNode ownerConditionNode = triggerConditionNode.getChildNode("owner");
     if (!ownerConditionNode.isEmpty())
         {
@@ -111,43 +138,11 @@ int main (int argc, char ** argv) {
         }
 
 
-    cout << "(trigger condition:)" << endl;
+    cout << "(trigger condition information)" << endl;
     cout << "has : " << hasCondition << endl;
     cout << "object : " << objectCondition << endl;
     cout << "owner : " << ownerCondition << endl;
 
-
-        //triggerNode = roomNode.getChildNode(j++);
-       // } while (!triggerNode.isEmpty());
-
-
-    /*
-    string lname = authorNode.getAttribute("lname");
-    // See if there is a partial match between the
-    // search string and the author last name
-    if (lname.find(author)!=string::npos) {
-      // Get the ISBN
-      string isbn10 = bookNode.getAttribute("isbn10");
-      // Get the author name
-      string author = authorNode.getText();
-      // Get the title
-      XMLNode titleNode = bookNode.getChildNode("title");
-      string title = titleNode.getText();
-      // Get the Publisher
-      XMLNode pubNode = bookNode.getChildNode("publisher");
-      string publisher = pubNode.getText();
-      // Get the Price (in one line)
-      string price = bookNode.getChildNode("price").getText();
-
-      cout << "Title: " << title << endl;
-      cout << "Author: " << author << endl;
-      cout << "Publisher: " << publisher << endl;
-      cout << "ISBN10: " << isbn10 << endl;
-      cout << "Price: " << price << endl << endl;
-    }
-    */
-    cout << "Name of the room is : " << name << endl;
-    cout << "Description of the room is : " << description << endl;
     //cout << "Item in the room : " << itemName << endl;
     //cout << "Item2 name : " << item2Name << endl;
     roomNode=xMainNode.getChildNode(i++);
