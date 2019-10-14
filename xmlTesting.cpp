@@ -68,7 +68,7 @@ int main (int argc, char ** argv) {
 
     //XMLNode triggerNode = roomNode.getChildNode("trigger");
     int j = 0;
-    XMLNode triggerNode=xMainNode.getChildNode(j++);
+    XMLNode triggerNode=xMainNode.getChildNode("trigger");
     do
         {
         XMLNode typeNode = triggerNode.getChildNode("type");
