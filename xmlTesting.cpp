@@ -1,6 +1,7 @@
 #include <string>
 #include <iostream>
 #include <sstream>
+#include <vector>
 
 #define XML_USE_STL
 #include "xmlParser.h"
@@ -13,10 +14,11 @@ public :
     Room();
     Room(string nameInit, string descriptionInit, string statusInit, string typeInit, vector<item>, )
 
+private :
 
 };
 
-class item
+class Item
 {
 public:
     Item();
