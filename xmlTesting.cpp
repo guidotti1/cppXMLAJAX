@@ -61,7 +61,7 @@ int main (int argc, char ** argv) {
     XMLNode itemNode = roomNode.getChildNode("item");
     string itemName = itemNode.getText();
     
-    XML item2Node = roomNode.getChildNode("item");
+    XMLNode item2Node = roomNode.getChildNode("item");
     string item2Name = item2Node.getText();
     
 
