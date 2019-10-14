@@ -58,12 +58,32 @@ int main (int argc, char ** argv) {
     XMLNode descriptionNode = roomNode.getChildNode("description");
     string description = descriptionNode.getText();
 
+    /*
     XMLNode itemNode = roomNode.getChildNode("item");
     string itemName = itemNode.getText();
-    
+
     XMLNode item2Node = roomNode.getChildNode("item");
     string item2Name = item2Node.getText();
-    
+    */
+
+    XMLNode triggerNode = roomNode.getChildNode("trigger");
+    do
+        {
+        XMLNode typeNode = triggerNode.getChildNode("type");
+        string type = typeNode.getText();
+
+        XMLNode commandNode = triggerNode.getChildNode("command");
+        string command = commandNode.getText();
+
+        XMLNode printNode = triggerNode.getChildNode("print");
+        string print = printNode.getText();
+
+        cout << "type : " << type << endl;
+        cout << "command : " << command << endl;
+        cout << "print : " << print < <endl;
+       // triggerNode = roomNode.getChildNode(i++);
+        } while (!triggerNode.isEmpty());
+
 
     /*
     string lname = authorNode.getAttribute("lname");
@@ -92,8 +112,8 @@ int main (int argc, char ** argv) {
     */
     cout << "Name of the room is : " << name << endl;
     cout << "Description of the room is : " << description << endl;
-    cout << "Item in the room : " << itemName << endl;
-    cout << "Item2 name : " << item2Name << endl;
+    //cout << "Item in the room : " << itemName << endl;
+    //cout << "Item2 name : " << item2Name << endl;
     roomNode=xMainNode.getChildNode(i++);
   } while (!roomNode.isEmpty());
 
