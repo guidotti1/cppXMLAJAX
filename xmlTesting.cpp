@@ -20,7 +20,7 @@ int main (int argc, char ** argv) {
   cout << "Author: " << author << endl;
 */
   // this opens and parses the correct XML file:
-  XMLNode xMainNode=XMLNode::openFileHelper(bookFile.c_str(),"map");
+  XMLNode xMainNode=XMLNode::openFileHelper(gameFile.c_str(),"map");
   int i = 0;
   // get the first book node
   XMLNode roomNode=xMainNode.getChildNode(i++);
