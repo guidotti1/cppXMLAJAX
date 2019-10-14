@@ -14,7 +14,7 @@ CFLAGS= -g
 
 RM= /bin/rm -f
 
-all: testClient 
+all: testClient xmlTesting
 
 xmlParser.o: xmlParser.cpp xmlParser.h
 	g++ -c xmlParser.cpp
@@ -24,6 +24,12 @@ testClient.o: testClient.cpp xmlParser.h
 
 testClient: testClient.o xmlParser.o
 	$(CC) testClient.o xmlParser.o -o testClient -L/usr/local/lib
+	
+xmlTesting.o: xmlTesting.cpp xmlParser.h
+	$(CC) -c xmlTesting.cpp
+	
+xmlTesting: xmlTesting.o xmlParser.o
+	$(CC) xmlTesting.o xmlParser.o -o xmlTesting -L/usr/local/lib
 
 clean:
-	rm -f *.o  testClient
+	rm -f *.o  testClient xmlTesting
