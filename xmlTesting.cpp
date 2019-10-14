@@ -88,8 +88,8 @@ int main (int argc, char ** argv) {
     */
     cout << "Name of the room is : " << name << endl;
     cout << "Description of the room is : " << description << endl;
-    cout << "Item in the room " << itemName << endl;
-    roomNode=xMainNode.getChildNode(i++);
+    cout << "Item in the room : " << itemName << endl;
+    //roomNode=xMainNode.getChildNode(i++);
   } while (!roomNode.isEmpty());
 
   cout << endl;
