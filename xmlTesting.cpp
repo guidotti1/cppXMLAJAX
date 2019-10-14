@@ -80,7 +80,7 @@ int main (int argc, char ** argv) {
     XMLNode printNode = triggerNode.getChildNode("print");
     string print = printNode.getText();
 
-    cout <<< "(trigger:)" << endl;
+    cout << "(trigger:)" << endl;
     cout << "type : " << type << endl;
     cout << "command : " << command << endl;
     cout << "print : " << print << endl;
@@ -88,16 +88,16 @@ int main (int argc, char ** argv) {
     XMLNode triggerConditionNode = triggerNode.getChildNode("condition");
 
     XMLNode hasConditionNode = triggerConditionNode.getChildNode("has");
-    string hasCondition = hasConditionNode.text();
+    string hasCondition = hasConditionNode.getText();
 
     XMLNode objectConditionNode = triggerConditionNode.getChildNode("object");
-    string objectCondition = objectConditionNode.text();
+    string objectCondition = objectConditionNode.getText();
 
     XMLNode ownerConditionNode = triggerConditionNode.getChildNode("owner");
-    string ownerCondtion = ownerConditionNode.text();
+    string ownerCondtion = ownerConditionNode.getText();
 
     cout << "(trigger condition:)" << endl;
-    cout << "has : " << has << endl;
+    cout << "has : " << hasCondition << endl;
     cout << "object : " << objectCondition << endl;
     cout << "owner : " << ownerCondition << endl;
 
