@@ -80,7 +80,7 @@ int main (int argc, char ** argv) {
 
         cout << "type : " << type << endl;
         cout << "command : " << command << endl;
-        cout << "print : " << print < <endl;
+        cout << "print : " << print << endl;
        // triggerNode = roomNode.getChildNode(i++);
         } while (!triggerNode.isEmpty());
 
