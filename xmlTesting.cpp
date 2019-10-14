@@ -88,13 +88,24 @@ int main (int argc, char ** argv) {
     XMLNode triggerConditionNode = triggerNode.getChildNode("condition");
 
     XMLNode hasConditionNode = triggerConditionNode.getChildNode("has");
-    string hasCondition = hasConditionNode.getText();
+    if (hasConditionNode != emptyNode())
+        {
+         string hasCondition = hasConditionNode.getText();
+        }
 
     XMLNode objectConditionNode = triggerConditionNode.getChildNode("object");
-    string objectCondition = objectConditionNode.getText();
+    if (objectConditionNode != emptyNode())
+        {
+        string objectCondition = objectConditionNode.getText();
+        }
+
 
     XMLNode ownerConditionNode = triggerConditionNode.getChildNode("owner");
-    string ownerCondition = ownerConditionNode.getText();
+    if (ownerConditionNode != emptyNode())
+        {
+        string ownerCondition = ownerConditionNode.getText();
+        }
+
 
     cout << "(trigger condition:)" << endl;
     cout << "has : " << hasCondition << endl;
