@@ -42,14 +42,16 @@ private:
 
 int main (int argc, char ** argv) {
 
-  string gameFile = "testGame.xml";
+    string gameFile = "testGame.xml";
 
-  // this opens and parses the correct XML file:
-  XMLNode xMainNode=XMLNode::openFileHelper(gameFile.c_str(),"map");
-  int i = 0;
-  // get the first room node
-  XMLNode roomNode=xMainNode.getChildNode(i++);
-  do {
+    // this opens and parses the correct XML file:
+    XMLNode xMainNode=XMLNode::openFileHelper(gameFile.c_str(),"map");
+    int i = 0;
+    // get the first room node
+    XMLNode roomNode=xMainNode.getChildNode(i++);
+
+    XMLNode emptyNode = emptyNode();
+    do {
     // Get the room name
     XMLNode nameNode = roomNode.getChildNode("name");
     string name = nameNode.getText();
@@ -80,6 +82,7 @@ int main (int argc, char ** argv) {
     XMLNode printNode = triggerNode.getChildNode("print");
     string print = printNode.getText();
 
+
     cout << "(trigger:)" << endl;
     cout << "type : " << type << endl;
     cout << "command : " << command << endl;
@@ -88,20 +91,20 @@ int main (int argc, char ** argv) {
     XMLNode triggerConditionNode = triggerNode.getChildNode("condition");
 
     XMLNode hasConditionNode = triggerConditionNode.getChildNode("has");
-    if (hasConditionNode != emptyNode())
+    if (hasConditionNode != emptyNode)
         {
          string hasCondition = hasConditionNode.getText();
         }
 
     XMLNode objectConditionNode = triggerConditionNode.getChildNode("object");
-    if (objectConditionNode != emptyNode())
+    if (objectConditionNode != emptyNode)
         {
         string objectCondition = objectConditionNode.getText();
         }
 
 
     XMLNode ownerConditionNode = triggerConditionNode.getChildNode("owner");
-    if (ownerConditionNode != emptyNode())
+    if (ownerConditionNode != emptyNode)
         {
         string ownerCondition = ownerConditionNode.getText();
         }
@@ -147,8 +150,8 @@ int main (int argc, char ** argv) {
     //cout << "Item in the room : " << itemName << endl;
     //cout << "Item2 name : " << item2Name << endl;
     roomNode=xMainNode.getChildNode(i++);
-  } while (!roomNode.isEmpty());
+    } while (!roomNode.isEmpty());
 
-  cout << endl;
-  return 0;
+    cout << endl;
+    return 0;
 }
