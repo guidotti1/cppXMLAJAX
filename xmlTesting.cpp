@@ -112,7 +112,7 @@ int main (int argc, char ** argv) {
 
     cout << "(trigger information)" << endl;
     cout << "type : " << triggerType << endl;
-    cout << "command : " << comand << endl;
+    cout << "command : " << command << endl;
     cout << "print : " << triggerPrint << endl;
 
 
