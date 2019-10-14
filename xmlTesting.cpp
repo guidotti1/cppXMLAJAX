@@ -12,7 +12,7 @@ class Room
 {
 public :
     Room();
-    Room(string nameInit, string descriptionInit, string statusInit, string typeInit, vector<item>, )
+    Room(string nameInit, string descriptionInit, string statusInit, string typeInit);
 
 private :
 
