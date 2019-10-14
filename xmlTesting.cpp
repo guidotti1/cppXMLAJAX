@@ -50,7 +50,7 @@ int main (int argc, char ** argv) {
     // get the first room node
     XMLNode roomNode=xMainNode.getChildNode(i++);
 
-    XMLNode emptyNode = emptyNode();
+    //XMLNode emptyNode = emptyNode();
     do {
     // Get the room name
     XMLNode nameNode = roomNode.getChildNode("name");
@@ -91,20 +91,20 @@ int main (int argc, char ** argv) {
     XMLNode triggerConditionNode = triggerNode.getChildNode("condition");
 
     XMLNode hasConditionNode = triggerConditionNode.getChildNode("has");
-    if (hasConditionNode != emptyNode)
+    if (!hasConditionNode.isEmpty())
         {
          string hasCondition = hasConditionNode.getText();
         }
 
     XMLNode objectConditionNode = triggerConditionNode.getChildNode("object");
-    if (objectConditionNode != emptyNode)
+    if (!objectConditionNode.isEmpty())
         {
         string objectCondition = objectConditionNode.getText();
         }
 
 
     XMLNode ownerConditionNode = triggerConditionNode.getChildNode("owner");
-    if (ownerConditionNode != emptyNode)
+    if (!ownerConditionNode.isEmpty())
         {
         string ownerCondition = ownerConditionNode.getText();
         }
