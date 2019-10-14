@@ -67,22 +67,41 @@ int main (int argc, char ** argv) {
     */
 
     //XMLNode triggerNode = roomNode.getChildNode("trigger");
-    int j = 0;
+    //int j = 0;
     XMLNode triggerNode=roomNode.getChildNode("trigger");
     //do
        // {
-        XMLNode typeNode = triggerNode.getChildNode("type");
-        string type = typeNode.getText();
+    XMLNode typeNode = triggerNode.getChildNode("type");
+    string type = typeNode.getText();
 
-        XMLNode commandNode = triggerNode.getChildNode("command");
-        string command = commandNode.getText();
+    XMLNode commandNode = triggerNode.getChildNode("command");
+    string command = commandNode.getText();
 
-        XMLNode printNode = triggerNode.getChildNode("print");
-        string print = printNode.getText();
+    XMLNode printNode = triggerNode.getChildNode("print");
+    string print = printNode.getText();
 
-        cout << "type : " << type << endl;
-        cout << "command : " << command << endl;
-        cout << "print : " << print << endl;
+    cout <<< "(trigger:)" << endl;
+    cout << "type : " << type << endl;
+    cout << "command : " << command << endl;
+    cout << "print : " << print << endl;
+
+    XMLNode triggerConditionNode = triggerNode.getChildNode("condition");
+
+    XMLNode hasConditionNode = triggerConditionNode.getChildNode("has");
+    string hasCondition = hasConditionNode.text();
+
+    XMLNode objectConditionNode = triggerConditionNode.getChildNode("object");
+    string objectCondition = objectConditionNode.text();
+
+    XMLNode ownerConditionNode = triggerConditionNode.getChildNode("owner");
+    string ownerCondtion = ownerConditionNode.text();
+
+    cout << "(trigger condition:)" << endl;
+    cout << "has : " << has << endl;
+    cout << "object : " << objectCondition << endl;
+    cout << "owner : " << ownerCondition << endl;
+
+
         //triggerNode = roomNode.getChildNode(j++);
        // } while (!triggerNode.isEmpty());
 
