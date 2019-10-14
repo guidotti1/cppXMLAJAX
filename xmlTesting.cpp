@@ -66,7 +66,9 @@ int main (int argc, char ** argv) {
     string item2Name = item2Node.getText();
     */
 
-    XMLNode triggerNode = roomNode.getChildNode("trigger");
+    //XMLNode triggerNode = roomNode.getChildNode("trigger");
+    int j = 0;
+    XMLNode triggerNode=xMainNode.getChildNode(j++);
     do
         {
         XMLNode typeNode = triggerNode.getChildNode("type");
@@ -81,7 +83,7 @@ int main (int argc, char ** argv) {
         cout << "type : " << type << endl;
         cout << "command : " << command << endl;
         cout << "print : " << print << endl;
-       // triggerNode = roomNode.getChildNode(i++);
+        triggerNode = roomNode.getChildNode(j++);
         } while (!triggerNode.isEmpty());
 
 
