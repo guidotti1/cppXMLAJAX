@@ -304,7 +304,7 @@ void getCreatures(XMLNode node)
         cout << "attack for creature : " << endl;
         getAttack(creatureNode);
         cout << "trigger for creature : " << endl;
-        getTriggers(attackNode);
+        getTriggers(creatureNode);
         }
 }
 
