@@ -80,26 +80,63 @@ int main (int argc, char ** argv) {
     cout << "Description of the room is : " << description << endl;
     cout << "Type of the room is : " <<  roomType << endl;
 
-    int j = 0;
-    XMLNode nextnode = roomNode.getChildNode("item");
 
-    do
+    //get information for item in the room
+    XMLNode itemNode = roomNode.getChildNode("item");
+    if (!itemNode.isEmpty())
         {
-        string itemName =  "default";
-        //XMLNode itemNode = nextnode.getChildNode("item");
-        if (!nextnode.isEmpty())
+        string itemName, itemWriting, itemStatus = "default";
+
+        XMLNode itemNameNode = itemNode.getChildNode("name");
+        if (!itemNameNode.isEmpty())
             {
-                itemName = nextnode.getText();
+            itemName = itemNameNode.getText();
             }
 
+        XMLNode itemWritingNode = itemNode.getChildNode("writing");
+        if(!itemWritingNode.isEmpty())
+            {
+            itemWriting = itemWritingNode.getText();
+            }
 
-        cout << "itemName " << itemName << endl;
-        nextnode=roomNode.getChildNode("item", j++);
-        }while (!nextnode.isEmpty());
+        XMLNode itemStatusNode = itemNode.getChildNode("status");
+        if (!itemStatusNode.isEmpty())
+            {
+            itemStatus = itemStatusNode.getText();
+            }
+
+        cout << "(item information)" << endl;
+        cout << "Item name : " << itemName << endl;
+        cout << "Item writing : " << itemWriting << endl;
+        cout << "Item status : " << itemStatus << endl;
+
+        //turnon information for the item
+        XML turnonNode = itemNode.getChildNode("turnon");
+        if (!turnonNode.isEmpty())
+            {
+            string turnonPrint, turnonAction = "default";
+
+            XMLNode turnonPrintNode = turnonNode.getChildNode("print");
+            if (!turnonPrintNode.isEmpty())
+                {
+                turnonPrint = turnonPrintNode.getText();
+                }
+
+            XMLNode turnonActionNode = turnonNode.getChildNode("action");
+            if(!turnonActionNode.isEmpty())
+                {
+                turnonAction = turnonActionNode.getText();
+                }
+
+            cout << "(item turnon information)" << endl;
+            cout << "Item turnon print : " << turnonPrint << endl;
+            cout << "Item turnon action : " << turnonAction << endl;
+            }
+        }
+
+
+
     /*
-    XMLNode itemNode = roomNode.getChildNode("item");
-    string itemName = itemNode.getText();
-
     XMLNode item2Node = roomNode.getChildNode("item");
     string item2Name = item2Node.getText();
     */
