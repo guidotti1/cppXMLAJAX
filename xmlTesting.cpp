@@ -136,7 +136,7 @@ fuck::fuck()
     cout << fuckskon<<endl;
 }
 
-turnon::turnon(XMLNode node)
+turnon::turnon()
 {
     print, action = "";
 
