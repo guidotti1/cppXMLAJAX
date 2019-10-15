@@ -229,7 +229,7 @@ int main (int argc, char ** argv) {
         cout << "name : " << borderName << endl;
         }
 
-    int numberContainers
+    //int numberContainers
 
 
     roomNode=xMainNode.getChildNode(i++);
