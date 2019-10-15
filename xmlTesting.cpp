@@ -61,8 +61,8 @@ class room
 public :
     room();
     room(XMLNode node);
-    getItems(XMLNode node);
-    getTriggers(XMLNode node);
+    void getItems(XMLNode node);
+    void getTriggers(XMLNode node);
 
 
 private :
@@ -213,7 +213,7 @@ turnon::turnon(XMLNode node)
         }
 }
 
-room::getItems(XMLNode node)
+void room::getItems(XMLNode node)
 {
     int numberItems = node.nChildNode("item");
     for (int nItems = 0; nItems < numberItems; nItems++)
@@ -263,7 +263,7 @@ trigger::trigger(XMLNode node)
     getCondition(triggerNode);
 }
 
-room::getTriggers(XMLNode node)
+void room::getTriggers(XMLNode node)
 {
     int numberTriggers = node.nChildNode("trigger");
     for (int nTriggers = 0; nTriggers < numberTriggers; nTriggers++)
