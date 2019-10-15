@@ -76,9 +76,9 @@ private :
 
 
 
-room getRoomInformation(XMLNode);
-void getItems(XMLNode, vector<item> & items);
-void getTriggers(XMLNode);
+//room getRoomInformation(XMLNode);
+//void getItems(XMLNode, vector<item> & items);
+//void getTriggers(XMLNode);
 void getBorders (XMLNode);
 void getContainers(XMLNode);
 void getCreatures(XMLNode);
