@@ -106,7 +106,7 @@ int main (int argc, char ** argv) {
     //get information for items in the room
     newRoom.getItems(roomNode);
     //get information for triggers in the room
-    getTriggers(roomNode);
+    newRoom.getTriggers(roomNode);
     //get information for borders in the room
     getBorders(roomNode);
     //get information for containers in the room
