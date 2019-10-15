@@ -111,14 +111,14 @@ void getRoomInformation(XMLNode node)
         }
 
     // Get the room name
-    XMLNode nameNode = roomNode.getChildNode("name");
+    XMLNode nameNode = node.getChildNode("name");
     if (!nameNode.isEmpty())
         {
         name = nameNode.getText();
         }
 
     //Get the room description
-    XMLNode descriptionNode = roomNode.getChildNode("description");
+    XMLNode descriptionNode = node.getChildNode("description");
     if (!descriptionNode.isEmpty())
         {
         description = descriptionNode.getText();
