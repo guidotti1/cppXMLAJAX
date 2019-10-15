@@ -8,20 +8,6 @@
 
 using namespace std;
 
-class room
-{
-public :
-    room();
-    room(string nameInit, string descriptionInit, string statusInit, string typeInit);
-
-private :
-    string name;
-    string description;
-    string type;
-    vector<item> items;
-
-};
-
 class item
 {
 public:
@@ -42,6 +28,21 @@ private:
     //bool on;
     //trigger itemTrigger;
 };
+
+class room
+{
+public :
+    room();
+    room(string nameInit, string descriptionInit, string statusInit, string typeInit);
+
+private :
+    string name;
+    string description;
+    string type;
+    vector<item> items;
+
+};
+
 
 class turnon
 {
