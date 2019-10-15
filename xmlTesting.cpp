@@ -260,7 +260,7 @@ trigger::trigger(XMLNode node)
     cout << "action : " << action << endl;
 
     cout << "condition information for trigger" << endl;
-    getCondition(triggerNode);
+    getCondition(node);
 }
 
 void room::getTriggers(XMLNode node)
