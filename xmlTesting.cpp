@@ -40,6 +40,12 @@ private:
 };
 
 
+void getItems(XMLNode);
+void getTriggers(XMLNode);
+void getCreatures(XMLNode);
+void getContainers(XMLNode);
+
+
 int main (int argc, char ** argv) {
 
     string gameFile = "testGame.xml";
@@ -52,8 +58,9 @@ int main (int argc, char ** argv) {
 
 
     do {
-    string roomType, name, description = "default";
+    string roomType, name, description = "";
 
+    //room information
     //room type
     XMLNode roomTypeNode = roomNode.getChildNode("type");
     if (!roomTypeNode.isEmpty())
@@ -81,71 +88,69 @@ int main (int argc, char ** argv) {
     cout << "Type of the room is : " <<  roomType << endl;
 
 
-    //get information for item in the room
+    //get information for items in the room
+    getItems(roomNode);
+    /*
     int numberItems = roomNode.nChildNode("item");
-    cout << "HEREREREREREREERERERE"<<endl;
-    cout << "numberItems " << numberItems << endl;
     for (int nItems = 0; nItems < numberItems; nItems++)
         {
             XMLNode itemNode = roomNode.getChildNode("item", nItems);
-            if (!itemNode.isEmpty())
+            string itemName, itemWriting, itemStatus = "";
+
+            XMLNode itemNameNode = itemNode.getChildNode("name");
+            if (!itemNameNode.isEmpty())
                 {
-                string itemName, itemWriting, itemStatus = "default";
+                itemName = itemNameNode.getText();
+                }
 
-                XMLNode itemNameNode = itemNode.getChildNode("name");
-                if (!itemNameNode.isEmpty())
+            XMLNode itemWritingNode = itemNode.getChildNode("writing");
+            if(!itemWritingNode.isEmpty())
+                {
+                itemWriting = itemWritingNode.getText();
+                }
+
+            XMLNode itemStatusNode = itemNode.getChildNode("status");
+            if (!itemStatusNode.isEmpty())
+                {
+                itemStatus = itemStatusNode.getText();
+                }
+
+            cout << "(item information)" << endl;
+            cout << "Item name : " << itemName << endl;
+            cout << "Item writing : " << itemWriting << endl;
+            cout << "Item status : " << itemStatus << endl;
+
+            //turnon information for the item
+            XMLNode turnonNode = itemNode.getChildNode("turnon");
+            if (!turnonNode.isEmpty())
+                {
+                string turnonPrint, turnonAction = "";
+
+                XMLNode turnonPrintNode = turnonNode.getChildNode("print");
+                if (!turnonPrintNode.isEmpty())
                     {
-                    itemName = itemNameNode.getText();
+                    turnonPrint = turnonPrintNode.getText();
                     }
 
-                XMLNode itemWritingNode = itemNode.getChildNode("writing");
-                if(!itemWritingNode.isEmpty())
+                XMLNode turnonActionNode = turnonNode.getChildNode("action");
+                if(!turnonActionNode.isEmpty())
                     {
-                    itemWriting = itemWritingNode.getText();
+                    turnonAction = turnonActionNode.getText();
                     }
 
-                XMLNode itemStatusNode = itemNode.getChildNode("status");
-                if (!itemStatusNode.isEmpty())
-                    {
-                    itemStatus = itemStatusNode.getText();
-                    }
-
-                cout << "(item information)" << endl;
-                cout << "Item name : " << itemName << endl;
-                cout << "Item writing : " << itemWriting << endl;
-                cout << "Item status : " << itemStatus << endl;
-
-                //turnon information for the item
-                XMLNode turnonNode = itemNode.getChildNode("turnon");
-                if (!turnonNode.isEmpty())
-                    {
-                    string turnonPrint, turnonAction = "default";
-
-                    XMLNode turnonPrintNode = turnonNode.getChildNode("print");
-                    if (!turnonPrintNode.isEmpty())
-                        {
-                        turnonPrint = turnonPrintNode.getText();
-                        }
-
-                    XMLNode turnonActionNode = turnonNode.getChildNode("action");
-                    if(!turnonActionNode.isEmpty())
-                        {
-                        turnonAction = turnonActionNode.getText();
-                        }
-
-                    cout << "(item turnon information)" << endl;
-                    cout << "Item turnon print : " << turnonPrint << endl;
-                    cout << "Item turnon action : " << turnonAction << endl;
-                    }
+                cout << "(item turnon information)" << endl;
+                cout << "Item turnon print : " << turnonPrint << endl;
+                cout << "Item turnon action : " << turnonAction << endl;
                 }
         }
+    */
 
-
-    //trigger information for the room
-    XMLNode triggerNode=roomNode.getChildNode("trigger");
-    if (!triggerNode.isEmpty())
+    //get information for triggers in the room
+    int numberTriggers = roomNode.nChildNode("trigger");
+    for (int nTriggers = 0; nTriggers < numberTriggers; nTriggers++)
         {
-            string triggerType, command, triggerPrint = "default";
+            XMLNode triggerNode=roomNode.getChildNode("trigger", nTriggers);
+            string triggerType, command, triggerPrint = "";
 
             XMLNode typeNode = triggerNode.getChildNode("type");
             if (!typeNode.isEmpty())
@@ -173,7 +178,7 @@ int main (int argc, char ** argv) {
             XMLNode triggerConditionNode = triggerNode.getChildNode("condition");
             if (!triggerConditionNode.isEmpty())
                 {
-                    string hasCondition, objectCondition, ownerCondition = "default";
+                    string hasCondition, objectCondition, ownerCondition = "";
 
                     XMLNode hasConditionNode = triggerConditionNode.getChildNode("has");
                     if (!hasConditionNode.isEmpty())
@@ -200,12 +205,32 @@ int main (int argc, char ** argv) {
                 }
         }
 
+    //borders for the room
+    int numberBorders = roomNode.nChildNode("border");
+    for (int nBorders = 0; nBorders < numberBorders; nBorders++)
+        {
+        XMLNode borderNode = roomNode.getChildNode("border", nBorders);
+        string borderDirection, borderName = "";
 
+        XMLNode borderDirectionNode = borderNode.getChildNode("direction");
+        if (!borderDirectionNode.isEmpty())
+            {
+            borderDirection = borderDirectionNode.getText();
+            }
 
+        XMLNode borderNameNode = borderNode.getChildNode("name");
+        if (!borderNameNode.isEmpty())
+            {
+            borderName = borderNameNode.getText();
+            }
 
+        cout << "(border information)"<<endl;
+        cout << "direction : " << borderDirection << endl;
+        cout << "name : " << borderName << endl;
+        }
 
-    //cout << "Item in the room : " << itemName << endl;
-    //cout << "Item2 name : " << item2Name << endl;
+    int numberContainers
+
 
     roomNode=xMainNode.getChildNode(i++);
     } while (!roomNode.isEmpty());
@@ -213,3 +238,63 @@ int main (int argc, char ** argv) {
     cout << endl;
     return 0;
 }
+
+
+void getItems(XMLNode roomNode)
+{
+    int numberItems = roomNode.nChildNode("item");
+    for (int nItems = 0; nItems < numberItems; nItems++)
+        {
+            XMLNode itemNode = roomNode.getChildNode("item", nItems);
+            string itemName, itemWriting, itemStatus = "";
+
+            XMLNode itemNameNode = itemNode.getChildNode("name");
+            if (!itemNameNode.isEmpty())
+                {
+                itemName = itemNameNode.getText();
+                }
+
+            XMLNode itemWritingNode = itemNode.getChildNode("writing");
+            if(!itemWritingNode.isEmpty())
+                {
+                itemWriting = itemWritingNode.getText();
+                }
+
+            XMLNode itemStatusNode = itemNode.getChildNode("status");
+            if (!itemStatusNode.isEmpty())
+                {
+                itemStatus = itemStatusNode.getText();
+                }
+
+            cout << "(item information)" << endl;
+            cout << "Item name : " << itemName << endl;
+            cout << "Item writing : " << itemWriting << endl;
+            cout << "Item status : " << itemStatus << endl;
+
+            //turnon information for the item
+            XMLNode turnonNode = itemNode.getChildNode("turnon");
+            if (!turnonNode.isEmpty())
+                {
+                string turnonPrint, turnonAction = "";
+
+                XMLNode turnonPrintNode = turnonNode.getChildNode("print");
+                if (!turnonPrintNode.isEmpty())
+                    {
+                    turnonPrint = turnonPrintNode.getText();
+                    }
+
+                XMLNode turnonActionNode = turnonNode.getChildNode("action");
+                if(!turnonActionNode.isEmpty())
+                    {
+                    turnonAction = turnonActionNode.getText();
+                    }
+
+                cout << "(item turnon information)" << endl;
+                cout << "Item turnon print : " << turnonPrint << endl;
+                cout << "Item turnon action : " << turnonAction << endl;
+                }
+        }
+}
+//void getTriggers(XMLNode);
+//void getCreatures(XMLNode);
+//void getContainers(XMLNode);
