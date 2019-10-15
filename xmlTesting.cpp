@@ -111,7 +111,7 @@ int main (int argc, char ** argv) {
         cout << "Item status : " << itemStatus << endl;
 
         //turnon information for the item
-        XML turnonNode = itemNode.getChildNode("turnon");
+        XMLNode turnonNode = itemNode.getChildNode("turnon");
         if (!turnonNode.isEmpty())
             {
             string turnonPrint, turnonAction = "default";
