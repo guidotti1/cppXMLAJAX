@@ -121,7 +121,7 @@ int main (int argc, char ** argv) {
     return 0;
 }
 
-turnon::turnon(XMLNode node);
+turnon::turnon(XMLNode node)
 {
     if (!node.isEmpty())
         {
