@@ -163,7 +163,7 @@ item::item(XMLNode node)
     cout << "Item owner : " << owner << endl;
 
     //turnon information for the item
-    XMLNode turnonNode = itemNode.getChildNode("turnon");
+    XMLNode turnonNode = node.getChildNode("turnon");
     turnon itemTurnon(turnonNode);
 }
 
