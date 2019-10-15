@@ -94,7 +94,7 @@ int main (int argc, char ** argv) {
 
 
         cout << "itemName " << itemName << endl;
-
+        nextnode=roomNode.getChildNode(j++);
         }while (!nextnode.isEmpty());
     /*
     XMLNode itemNode = roomNode.getChildNode("item");
