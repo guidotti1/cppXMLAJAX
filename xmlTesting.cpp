@@ -81,7 +81,7 @@ int main (int argc, char ** argv) {
     cout << "Type of the room is : " <<  roomType << endl;
 
     int j = 0;
-    XMLNode nextnode = roomNode.getChildNode("item", j++);
+    XMLNode nextnode = roomNode.getChildNode("item");
 
     do
         {
@@ -94,7 +94,7 @@ int main (int argc, char ** argv) {
 
 
         cout << "itemName " << itemName << endl;
-        nextnode=roomNode.getChildNode(j++);
+        nextnode=roomNode.getChildNode("item", j++);
         }while (!nextnode.isEmpty());
     /*
     XMLNode itemNode = roomNode.getChildNode("item");
