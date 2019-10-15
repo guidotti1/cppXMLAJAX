@@ -99,7 +99,7 @@ int main (int argc, char ** argv) {
     //get information for containers in the room
     getContainers(roomNode);
     //get information for creatures in the room
-    getCreature(roomNode);
+    getCreatures(roomNode);
 
 
     roomNode=xMainNode.getChildNode(i++);
