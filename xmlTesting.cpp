@@ -35,7 +35,7 @@ private:
     string writing;
     string status;
     string owner;
-    turnon itemTurnon;               //NOTE THIS CAUSES ERRORS FIGURE OUT HOW TO ADDRESS THIS !!!!!!!!
+    turnon itemTurnon;
     //bool on;
     //trigger itemTrigger;
 };
@@ -54,6 +54,14 @@ private :
 
 };
 
+class border
+{
+public:
+    border();
+    border(XMLNode node);
+
+};
+
 class room
 {
 public :
@@ -61,6 +69,7 @@ public :
     room(XMLNode node);
     void getItems(XMLNode node);
     void getTriggers(XMLNode node);
+    void getBorders(XMLNode, node);
 
 
 private :
@@ -69,6 +78,7 @@ private :
     string type;
     vector<item> items;
     vector<trigger> triggers;
+    vector<border> borders;
 };
 
 
@@ -106,7 +116,7 @@ int main (int argc, char ** argv) {
     //get information for triggers in the room
     newRoom.getTriggers(roomNode);
     //get information for borders in the room
-    //getBorders(roomNode);
+    newRoom.getBorders(roomNode);
     //get information for containers in the room
     //getContainers(roomNode);
     //get information for creatures in the room
@@ -221,6 +231,27 @@ trigger::trigger(XMLNode node)
     //getCondition(node);
 }
 
+border::border(XMLNode node)
+{
+    string borderDirection, borderName = "";
+
+    XMLNode borderDirectionNode = node.getChildNode("direction");
+    if (!borderDirectionNode.isEmpty())
+        {
+        borderDirection = borderDirectionNode.getText();
+        }
+
+    XMLNode borderNameNode = node.getChildNode("name");
+    if (!borderNameNode.isEmpty())
+        {
+        borderName = borderNameNode.getText();
+        }
+
+    cout << "(border information)"<<endl;
+    cout << "direction : " << borderDirection << endl;
+    cout << "name : " << borderName << endl;
+
+}
 
 room::room(XMLNode node)
 {
@@ -279,33 +310,19 @@ void room::getTriggers(XMLNode node)
         }
 }
 
-/*
+
 void getBorders (XMLNode node)
 {
     int numberBorders = node.nChildNode("border");
     for (int nBorders = 0; nBorders < numberBorders; nBorders++)
         {
-        XMLNode borderNode = node.getChildNode("border", nBorders);
-        string borderDirection, borderName = "";
-
-        XMLNode borderDirectionNode = borderNode.getChildNode("direction");
-        if (!borderDirectionNode.isEmpty())
-            {
-            borderDirection = borderDirectionNode.getText();
-            }
-
-        XMLNode borderNameNode = borderNode.getChildNode("name");
-        if (!borderNameNode.isEmpty())
-            {
-            borderName = borderNameNode.getText();
-            }
-
-        cout << "(border information)"<<endl;
-        cout << "direction : " << borderDirection << endl;
-        cout << "name : " << borderName << endl;
+            XMLNode borderNode = node.getChildNode("border", nBorders);
+            border newBorder(borderNode);
+            borders.push_back(newBorder);
         }
 }
 
+/*
 void getContainers(XMLNode node)
 {
     int numberContainers = node.nChildNode("container");
