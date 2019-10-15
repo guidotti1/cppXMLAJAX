@@ -95,8 +95,8 @@ int main (int argc, char ** argv) {
     getTriggers(roomNode);
     //get information for borders in the room
     getBorders(roomNode);
-
-    //int numberContainers
+    //get information for containers in the room
+    getContainers(roomNode);
 
 
     roomNode=xMainNode.getChildNode(i++);
