@@ -50,9 +50,9 @@ int main (int argc, char ** argv) {
     // get the first room node
     XMLNode roomNode=xMainNode.getChildNode(i++);
 
-    //XMLNode emptyNode = emptyNode();
+
     do {
-    string roomType, name, description = "";
+    string roomType, name, description = "default";
 
     //room type
     XMLNode roomTypeNode = roomNode.getChildNode("type");
@@ -80,6 +80,18 @@ int main (int argc, char ** argv) {
     cout << "Description of the room is : " << description << endl;
     cout << "Type of the room is : " <<  roomType << endl;
 
+    int j = 0;
+    XMLNode nextnode = roomNode.getChildNode(j++);
+
+    do
+        {
+
+        XMLNode itemNode = nextnode.getChildNode("item");
+        string itemName = itemNode.getText();
+
+        cout << "itemName " << itemName << endl;
+
+        }while (!nextnode.isEmpty());
     /*
     XMLNode itemNode = roomNode.getChildNode("item");
     string itemName = itemNode.getText();
@@ -88,9 +100,9 @@ int main (int argc, char ** argv) {
     string item2Name = item2Node.getText();
     */
 
-
+    /* HERE
     XMLNode triggerNode=roomNode.getChildNode("trigger");
-    string triggerType, command, triggerPrint = "";
+    string triggerType, command, triggerPrint = "default";
 
     if (!triggerNode.isEmpty())
         {
@@ -153,6 +165,7 @@ int main (int argc, char ** argv) {
 
     //cout << "Item in the room : " << itemName << endl;
     //cout << "Item2 name : " << item2Name << endl;
+    */
     roomNode=xMainNode.getChildNode(i++);
     } while (!roomNode.isEmpty());
 
