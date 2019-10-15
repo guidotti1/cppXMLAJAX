@@ -33,7 +33,7 @@ class turnon
 {
 public :
     turnon();
-    turnon(string printInit, string actionInit);
+    turnon(XMLNode node);
 
 private:
     string print;
@@ -136,7 +136,6 @@ room :: room(XMLNode node)
 
 item::item(XMLNode node)
 {
-
     name, writing, status, owner = "";
 
     XMLNode itemNameNode = node.getChildNode("name");
@@ -165,28 +164,32 @@ item::item(XMLNode node)
 
     //turnon information for the item
     XMLNode turnonNode = itemNode.getChildNode("turnon");
-    if (!turnonNode.isEmpty())
-        {
-        string turnonPrint, turnonAction = "";
+    turnon itemTurnon(turnonNode);
+}
 
-        XMLNode turnonPrintNode = turnonNode.getChildNode("print");
+turnon::turnon(XMLNode node)
+{
+    if (!node.isEmpty())
+        {
+        string print, action = "";
+
+        XMLNode turnonPrintNode = node.getChildNode("print");
         if (!turnonPrintNode.isEmpty())
             {
-            turnonPrint = turnonPrintNode.getText();
+            print  = turnonPrintNode.getText();
             }
 
-        XMLNode turnonActionNode = turnonNode.getChildNode("action");
+        XMLNode turnonActionNode = node.getChildNode("action");
         if(!turnonActionNode.isEmpty())
             {
-            turnonAction = turnonActionNode.getText();
+            action = turnonActionNode.getText();
             }
 
         cout << "(item turnon information)" << endl;
-        cout << "Item turnon print : " << turnonPrint << endl;
-        cout << "Item turnon action : " << turnonAction << endl;
+        cout << "Item turnon print : " << print << endl;
+        cout << "Item turnon action : " << action << endl;
         }
 }
-
 
 
 void getItems(XMLNode node)
