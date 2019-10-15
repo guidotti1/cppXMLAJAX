@@ -33,7 +33,7 @@ class room
 {
 public :
     room();
-    room(string nameInit, string descriptionInit, string statusInit, string typeInit);
+    room(XMLNode node);
 
 private :
     string name;
@@ -55,7 +55,7 @@ private:
     string action;
 };
 
-void getRoomInformation(XMLNode);
+room getRoomInformation(XMLNode);
 void getItems(XMLNode);
 void getTriggers(XMLNode);
 void getBorders (XMLNode);
@@ -78,8 +78,10 @@ int main (int argc, char ** argv) {
 
     do {
 
+
+    room newRoom(roomNode);
     //get information for room
-    getRoomInformation(roomNode);
+    //newRoom = getRoomInformation(roomNode);
     //get information for items in the room
     getItems(roomNode);
     //get information for triggers in the room
@@ -98,11 +100,9 @@ int main (int argc, char ** argv) {
     return 0;
 }
 
-void getRoomInformation(XMLNode node)
+room :: room(XMLNode node)
 {
-
-    string roomType, name, description = "";
-
+    string name, description, type = "";
     //room information
     //room type
     XMLNode roomTypeNode = node.getChildNode("type");
@@ -128,9 +128,45 @@ void getRoomInformation(XMLNode node)
     cout << "(room information)" << endl;
     cout << "Name of the room is : " << name << endl;
     cout << "Description of the room is : " << description << endl;
-    cout << "Type of the room is : " <<  roomType << endl;
+    cout << "Type of the room is : " <<  type << endl;
 
 }
+
+/*
+room getRoomInformation(XMLNode node)
+{
+    string roomType, name, description = "";
+    //room information
+    //room type
+    XMLNode roomTypeNode = node.getChildNode("type");
+    if (!roomTypeNode.isEmpty())
+        {
+        roomType = roomTypeNode.getText();
+        }
+
+    // Get the room name
+    XMLNode nameNode = node.getChildNode("name");
+    if (!nameNode.isEmpty())
+        {
+        name = nameNode.getText();
+        }
+
+    //Get the room description
+    XMLNode descriptionNode = node.getChildNode("description");
+    if (!descriptionNode.isEmpty())
+        {
+        description = descriptionNode.getText();
+        }
+
+    room newRoom(name, description, roomType);
+    cout << "(room information)" << endl;
+    cout << "Name of the room is : " << name << endl;
+    cout << "Description of the room is : " << description << endl;
+    cout << "Type of the room is : " <<  roomType << endl;
+    return newRoom;
+
+}
+*/
 
 void getItems(XMLNode node)
 {
