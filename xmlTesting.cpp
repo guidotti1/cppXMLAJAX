@@ -329,27 +329,29 @@ void getCreatures(XMLNode node)
 
 void getCondition(XMLNode node)
 {
-    XMLNode conditionNode = node.getChildNode("condition");
-    if (!conditionNode.isEmpty())
+    int numberConditions = node.nChildNode("condition");
+    for (int nConditions = 0; nConditions < numberConditions; nConditions++)
         {
-        string object, status = "";
+            XMLNode conditionNode = node.getChildNode("condition", nConditions);
+            string object, status = "";
 
-        XMLNode objectNode = conditionNode.getChildNode("object");
-        if (!objectNode.isEmpty())
-            {
-            object = objectNode.getText();
+            XMLNode objectNode = conditionNode.getChildNode("object");
+            if (!objectNode.isEmpty())
+                {
+                object = objectNode.getText();
+                }
+
+            XMLNode statusNode = conditionNode.getChildNode("status");
+            if (!statusNode.isEmpty())
+                {
+                status = statusNode.getText();
+                }
+
+            cout << "(condition information)"<<endl;
+            cout << "object : " << object << endl;
+            cout << "status : " << status << endl;
             }
 
-        XMLNode statusNode = conditionNode.getChildNode("status");
-        if (!statusNode.isEmpty())
-            {
-            status = statusNode.getText();
-            }
 
-        cout << "(condition information)"<<endl;
-        cout << "object : " << object << endl;
-        cout << "status : " << status << endl;
-
-        }
 }
 
