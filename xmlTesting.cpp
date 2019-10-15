@@ -85,11 +85,11 @@ int main (int argc, char ** argv) {
 
     do
         {
-
+        string itemName =  "default";
         XMLNode itemNode = nextnode.getChildNode("item");
         if (!itemNode.isEmpty())
             {
-                string itemName = itemNode.getText();
+                itemName = itemNode.getText();
             }
 
 
