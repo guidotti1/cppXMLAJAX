@@ -20,9 +20,21 @@ int main (int argc, char ** argv) {
     XMLNode roomNode=xMainNode.getChildNode(i++);
 
     do {
-    int noNodes = nChildNode("item");
+    XMLNode itemNode = roomNode.getChildNode("item", 0);
 
-    cout << "NoNodes " << noNodes << endl;
+    XMLNode item2Node = roomNode.getChildNode("item", 1);
+
+    string item1, item2 = "default";
+
+    XMLNode item1NameNode = itemNode.getChildNode("name");
+    item1 = item1NameNode.getText();
+
+    XMLNode item2NameNode = item2Node.getChildNode("name");
+    item2 = item2NameNode.getText();
+
+
+    cout << "item1" << item1 << endl;
+    cout << "item2" << item2 << endl;
 
     roomNode=xMainNode.getChildNode(i++);
     } while (!roomNode.isEmpty());
