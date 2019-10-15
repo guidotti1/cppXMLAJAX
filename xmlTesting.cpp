@@ -98,6 +98,8 @@ int main (int argc, char ** argv) {
     getBorders(roomNode);
     //get information for containers in the room
     getContainers(roomNode);
+    //get information for creatures in the room
+    getCreature(roomNode);
 
 
     roomNode=xMainNode.getChildNode(i++);
@@ -305,13 +307,19 @@ void getCondition(XMLNode node)
     for (int nConditions = 0; nConditions < numberConditions; nConditions++)
         {
             XMLNode conditionNode = node.getChildNode("condition", nConditions);
-            string object, status, has = "";
+            string object, status, has, owner = "";
 
 
             XMLNode hasNode = conditionNode.getChildNode("has");
             if (!hasNode.isEmpty())
                 {
                 has = hasNode.getText();
+                }
+
+            XMLNode ownerNode = conditionNode.getChildNode("owner");
+            if (!ownerNode.isEmpty())
+                {
+                owner = ownerNode.getText();
                 }
 
             XMLNode objectNode = conditionNode.getChildNode("object");
@@ -327,6 +335,7 @@ void getCondition(XMLNode node)
                 }
 
             cout << "(condition information)"<<endl;
+            cout << "owner : " << owner << endl;
             cout << "has : " << has << endl;
             cout << "object : " << object << endl;
             cout << "status : " << status << endl;
