@@ -69,7 +69,7 @@ public :
     room(XMLNode node);
     void getItems(XMLNode node);
     void getTriggers(XMLNode node);
-    void getBorders(XMLNode, node);
+    void getBorders(XMLNode node);
 
 
 private :
