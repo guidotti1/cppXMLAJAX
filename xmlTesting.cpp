@@ -8,7 +8,16 @@
 
 using namespace std;
 
+class fuck
+{
+public :
+    fuck();
 
+private :
+    string fuckskon;
+
+
+};
 
 class turnon
 {
@@ -121,6 +130,12 @@ int main (int argc, char ** argv) {
     return 0;
 }
 
+fuck::fuck()
+{
+    fuckskon = "I HATE SKON SO FUCKING MUCH ";
+    cout << fuckson <<endl;
+}
+
 turnon::turnon(XMLNode node)
 {
     if (!node.isEmpty())
@@ -175,7 +190,8 @@ item::item(XMLNode node)
 
     //turnon information for the item
     XMLNode turnonNode = node.getChildNode("turnon");
-    turnon test(turnonNode);
+    newfuck fuck();
+    //urnon test(turnonNode);
 }
 
 
