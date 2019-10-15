@@ -87,7 +87,7 @@ int main (int argc, char ** argv) {
         {
         string itemName =  "default";
         XMLNode itemNode = nextnode.getChildNode("item");
-        if (!itemNode.isEmpty())
+        if (!nextnode.isEmpty())
             {
                 itemName = nextnode.getText();
             }
