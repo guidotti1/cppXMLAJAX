@@ -190,7 +190,7 @@ item::item(XMLNode node)
 
     //turnon information for the item
     XMLNode turnonNode = node.getChildNode("turnon");
-    newfuck fuck();
+    fuck newfuck();
     //urnon test(turnonNode);
 }
 
