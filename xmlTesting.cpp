@@ -121,39 +121,28 @@ int main (int argc, char ** argv) {
     return 0;
 }
 
-room::room(XMLNode node)
+turnon::turnon(XMLNode node)
 {
-    name, description, type = "";
-    //room information
-    //room type
-    XMLNode roomTypeNode = node.getChildNode("type");
-    if (!roomTypeNode.isEmpty())
+    if (!node.isEmpty())
         {
-        type = roomTypeNode.getText();
+        string print, action = "";
+
+        XMLNode turnonPrintNode = node.getChildNode("print");
+        if (!turnonPrintNode.isEmpty())
+            {
+            print  = turnonPrintNode.getText();
+            }
+
+        XMLNode turnonActionNode = node.getChildNode("action");
+        if(!turnonActionNode.isEmpty())
+            {
+            action = turnonActionNode.getText();
+            }
+
+        cout << "(item turnon information)" << endl;
+        cout << "Item turnon print : " << print << endl;
+        cout << "Item turnon action : " << action << endl;
         }
-
-    // Get the room name
-    XMLNode nameNode = node.getChildNode("name");
-    if (!nameNode.isEmpty())
-        {
-        name = nameNode.getText();
-        }
-
-    //Get the room description
-    XMLNode descriptionNode = node.getChildNode("description");
-    if (!descriptionNode.isEmpty())
-        {
-        description = descriptionNode.getText();
-        }
-
-    cout << "(room information)" << endl;
-    cout << "Name of the room is : " << name << endl;
-    cout << "Description of the room is : " << description << endl;
-    cout << "Type of the room is : " <<  type << endl;
-
-    getItems(node);
-    getTriggers(node);
-
 }
 
 item::item(XMLNode node)
@@ -187,41 +176,6 @@ item::item(XMLNode node)
     //turnon information for the item
     XMLNode turnonNode = node.getChildNode("turnon");
     turnon test(turnonNode);
-}
-
-turnon::turnon(XMLNode node)
-{
-    if (!node.isEmpty())
-        {
-        string print, action = "";
-
-        XMLNode turnonPrintNode = node.getChildNode("print");
-        if (!turnonPrintNode.isEmpty())
-            {
-            print  = turnonPrintNode.getText();
-            }
-
-        XMLNode turnonActionNode = node.getChildNode("action");
-        if(!turnonActionNode.isEmpty())
-            {
-            action = turnonActionNode.getText();
-            }
-
-        cout << "(item turnon information)" << endl;
-        cout << "Item turnon print : " << print << endl;
-        cout << "Item turnon action : " << action << endl;
-        }
-}
-
-void room::getItems(XMLNode node)
-{
-    int numberItems = node.nChildNode("item");
-    for (int nItems = 0; nItems < numberItems; nItems++)
-        {
-        XMLNode itemNode = node.getChildNode("item", nItems);
-        item newItem(itemNode);
-        items.push_back(newItem);
-        }
 }
 
 
@@ -261,6 +215,53 @@ trigger::trigger(XMLNode node)
 
     //cout << "condition information for trigger" << endl;
     //getCondition(node);
+}
+
+
+room::room(XMLNode node)
+{
+    name, description, type = "";
+    //room information
+    //room type
+    XMLNode roomTypeNode = node.getChildNode("type");
+    if (!roomTypeNode.isEmpty())
+        {
+        type = roomTypeNode.getText();
+        }
+
+    // Get the room name
+    XMLNode nameNode = node.getChildNode("name");
+    if (!nameNode.isEmpty())
+        {
+        name = nameNode.getText();
+        }
+
+    //Get the room description
+    XMLNode descriptionNode = node.getChildNode("description");
+    if (!descriptionNode.isEmpty())
+        {
+        description = descriptionNode.getText();
+        }
+
+    cout << "(room information)" << endl;
+    cout << "Name of the room is : " << name << endl;
+    cout << "Description of the room is : " << description << endl;
+    cout << "Type of the room is : " <<  type << endl;
+
+    getItems(node);
+    getTriggers(node);
+
+}
+
+void room::getItems(XMLNode node)
+{
+    int numberItems = node.nChildNode("item");
+    for (int nItems = 0; nItems < numberItems; nItems++)
+        {
+        XMLNode itemNode = node.getChildNode("item", nItems);
+        item newItem(itemNode);
+        items.push_back(newItem);
+        }
 }
 
 void room::getTriggers(XMLNode node)
