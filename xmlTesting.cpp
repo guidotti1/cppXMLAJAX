@@ -46,7 +46,7 @@ private:
     string writing;
     string status;
     string owner;
-    //turnon itemTurnon;
+    turnon itemTurnon;               //NOTE THIS CAUSES ERRORS FIGURE OUT HOW TO ADDRESS THIS !!!!!!!!
     //bool on;
     //trigger itemTrigger;
 };
@@ -136,6 +136,11 @@ fuck::fuck()
     cout << fuckskon<<endl;
 }
 
+turnon::turnon(XMLNode node)
+{
+    print, action = "";
+
+}
 turnon::turnon(XMLNode node)
 {
     if (!node.isEmpty())
