@@ -19,9 +19,8 @@ int main (int argc, char ** argv) {
     // get the first room node
     XMLNode roomNode=xMainNode.getChildNode(i++);
 
-
     do {
-    int noNodes = nChildNode(roomNode);
+    int noNodes = nChildNode("item");
 
     cout << "NoNodes " << noNodes << endl;
 
