@@ -305,7 +305,14 @@ void getCondition(XMLNode node)
     for (int nConditions = 0; nConditions < numberConditions; nConditions++)
         {
             XMLNode conditionNode = node.getChildNode("condition", nConditions);
-            string object, status = "";
+            string object, status, has = "";
+
+
+            XMLNode hasNode = conditionNode.getChildNode("has");
+            if (!hasNode.isEmpty())
+                {
+                has = hasNode.getText();
+                }
 
             XMLNode objectNode = conditionNode.getChildNode("object");
             if (!objectNode.isEmpty())
@@ -320,6 +327,7 @@ void getCondition(XMLNode node)
                 }
 
             cout << "(condition information)"<<endl;
+            cout << "has : " << has << endl;
             cout << "object : " << object << endl;
             cout << "status : " << status << endl;
             }
