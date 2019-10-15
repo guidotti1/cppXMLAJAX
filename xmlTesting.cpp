@@ -250,5 +250,44 @@ void getBorders (XMLNode node)
         cout << "name : " << borderName << endl;
         }
 }
+
+void getContainers(XMLNode node)
+{
+    int numberContainers = node.nChildNode("container");
+    for (int nContainers = 0; nContainers < numberContainers; nContainers++)
+        {
+        XMLNode containerNode = node.getChildNode("container", nContainers);
+        string containerName, containerStatus, containerAccept = "";
+
+        XMLNode containerNameNode = containerNode.getChildNode("name");
+        if (!containerNameNode.isEmpty())
+            {
+            containerName = containerNameNode.getText();
+            }
+
+        XMLNode containerStatusNode = containerNode.getChildNode("status");
+        if (!containerStatusNode.isEmpty())
+            {
+            containerStatus = containerStatusNode.getText();
+            }
+
+        XMLNode containerAcceptNode = containerNode.getChildNode("accept");
+        if (!containerAcceptNode.isEmpty())
+            {
+            containerAccept = containerAcceptNode.getText();
+            }
+        cout << "(container information)"<<endl;
+        cout << "container name : " << containerName << endl;
+        cout << "container status : " << containerStatus << endl;
+        cout << "container accept :" << containerAccept << endl;
+
+        cout << "items in container" << endl;
+        getItems(containerNode);
+
+        cout << "triggers for container " << endl;
+        getTriggers(containerNode);
+        }
+
+}
 //void getCreatures(XMLNode);
-//void getContainers(XMLNode);
+
