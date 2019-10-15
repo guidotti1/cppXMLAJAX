@@ -102,13 +102,13 @@ int main (int argc, char ** argv) {
 
 room :: room(XMLNode node)
 {
-    string name, description, type = "";
+    name, description, type = "";
     //room information
     //room type
     XMLNode roomTypeNode = node.getChildNode("type");
     if (!roomTypeNode.isEmpty())
         {
-        roomType = roomTypeNode.getText();
+        type = roomTypeNode.getText();
         }
 
     // Get the room name
