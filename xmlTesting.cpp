@@ -279,6 +279,7 @@ room::room(XMLNode node)
 
     getItems(node);
     getTriggers(node);
+    getBorders(node);
 
 }
 
