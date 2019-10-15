@@ -89,7 +89,7 @@ int main (int argc, char ** argv) {
         XMLNode itemNode = nextnode.getChildNode("item");
         if (!itemNode.isEmpty())
             {
-                itemName = itemNode.getText();
+                itemName = nextNode.getText();
             }
 
 
