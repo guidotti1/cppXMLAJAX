@@ -45,7 +45,7 @@ void getTriggers(XMLNode);
 void getBorders (XMLNode);
 void getContainers(XMLNode);
 void getCreatures(XMLNode);
-void getCondition(XMLNode node)
+void getCondition(XMLNode node);
 
 
 int main (int argc, char ** argv) {
