@@ -82,12 +82,6 @@ private :
 };
 
 
-
-
-//room getRoomInformation(XMLNode);
-//void getItems(XMLNode, vector<item> & items);
-//void getTriggers(XMLNode);
-
 void getContainers(XMLNode);
 void getCreatures(XMLNode);
 void getCondition(XMLNode node);
@@ -311,7 +305,7 @@ void room::getTriggers(XMLNode node)
 }
 
 
-void getBorders (XMLNode node)
+void room::getBorders (XMLNode node)
 {
     int numberBorders = node.nChildNode("border");
     for (int nBorders = 0; nBorders < numberBorders; nBorders++)
