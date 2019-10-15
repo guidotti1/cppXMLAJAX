@@ -254,9 +254,9 @@ trigger::trigger(XMLNode node)
         }
 
     cout << "(trigger information)" << endl;
-    cout << "type : " << triggerType << endl;
+    cout << "type : " << type << endl;
     cout << "command : " << command << endl;
-    cout << "print : " << triggerPrint << endl;
+    cout << "print : " << print << endl;
     cout << "action : " << action << endl;
 
     cout << "condition information for trigger" << endl;
