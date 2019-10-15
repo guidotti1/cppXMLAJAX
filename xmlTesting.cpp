@@ -46,7 +46,7 @@ private:
     string writing;
     string status;
     string owner;
-    turnon itemTurnon;
+    //turnon itemTurnon;
     //bool on;
     //trigger itemTrigger;
 };
@@ -191,7 +191,7 @@ item::item(XMLNode node)
     //turnon information for the item
     XMLNode turnonNode = node.getChildNode("turnon");
     fuck newfuck();
-    //urnon test(turnonNode);
+    //turnon test(turnonNode);
 }
 
 
