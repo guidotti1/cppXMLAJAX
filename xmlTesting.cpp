@@ -8,26 +8,30 @@
 
 using namespace std;
 
-class Room
+class room
 {
 public :
-    Room();
-    Room(string nameInit, string descriptionInit, string statusInit, string typeInit);
+    room();
+    room(string nameInit, string descriptionInit, string statusInit, string typeInit);
 
 private :
+    string name;
+    string description;
+    string type;
+    vector<item> items;
 
 };
 
-class Item
+class item
 {
 public:
-    Item();
-    Item(string nameInit, string writingInit, string statusInit, string ownerInit);
-    void drop();
-    void take();
-    void read();
-    void turnOn();
-    void putInContainer(); //probably should pass the current owner and new owner (e.g. user to container)
+    item();
+    item(string nameInit, string writingInit, string statusInit, string ownerInit);
+    //void drop();
+    //void take();
+    //void read();
+    //void turnOn();
+    //void putInContainer(); //probably should pass the current owner and new owner (e.g. user to container)
 
 
 private:
@@ -35,11 +39,22 @@ private:
     string writing;
     string status;
     string owner;
-    bool on;
+    //bool on;
     //trigger itemTrigger;
 };
 
+class turnon
+{
+public :
+    turnon();
+    turnon(string printInit, string actionInit);
 
+private:
+    string print;
+    string action;
+};
+
+void getRoomInformation(XMLNode);
 void getItems(XMLNode);
 void getTriggers(XMLNode);
 void getBorders (XMLNode);
@@ -61,11 +76,35 @@ int main (int argc, char ** argv) {
 
 
     do {
+
+    //get information for room
+    getRoomInformation(roomNode);
+    //get information for items in the room
+    getItems(roomNode);
+    //get information for triggers in the room
+    getTriggers(roomNode);
+    //get information for borders in the room
+    getBorders(roomNode);
+    //get information for containers in the room
+    getContainers(roomNode);
+    //get information for creatures in the room
+    getCreatures(roomNode);
+
+    roomNode=xMainNode.getChildNode(i++);
+    } while (!roomNode.isEmpty());
+
+    cout << endl;
+    return 0;
+}
+
+void getRoomInformation(XMLNode node)
+{
+
     string roomType, name, description = "";
 
     //room information
     //room type
-    XMLNode roomTypeNode = roomNode.getChildNode("type");
+    XMLNode roomTypeNode = node.getChildNode("type");
     if (!roomTypeNode.isEmpty())
         {
         roomType = roomTypeNode.getText();
@@ -90,28 +129,7 @@ int main (int argc, char ** argv) {
     cout << "Description of the room is : " << description << endl;
     cout << "Type of the room is : " <<  roomType << endl;
 
-
-    //get information for items in the room
-    getItems(roomNode);
-    //get information for triggers in the room
-    getTriggers(roomNode);
-    //get information for borders in the room
-    getBorders(roomNode);
-    //get information for containers in the room
-    getContainers(roomNode);
-    //get information for creatures in the room
-    getCreatures(roomNode);
-
-
-
-
-    roomNode=xMainNode.getChildNode(i++);
-    } while (!roomNode.isEmpty());
-
-    cout << endl;
-    return 0;
 }
-
 
 void getItems(XMLNode node)
 {
@@ -245,7 +263,7 @@ void getContainers(XMLNode node)
     for (int nContainers = 0; nContainers < numberContainers; nContainers++)
         {
         XMLNode containerNode = node.getChildNode("container", nContainers);
-        string containerName, containerStatus, containerAccept = "";
+        string containerName, containerStatus, containerAccept= "";
 
         XMLNode containerNameNode = containerNode.getChildNode("name");
         if (!containerNameNode.isEmpty())
@@ -264,6 +282,7 @@ void getContainers(XMLNode node)
             {
             containerAccept = containerAcceptNode.getText();
             }
+
         cout << "(container information)"<<endl;
         cout << "container name : " << containerName << endl;
         cout << "container status : " << containerStatus << endl;
