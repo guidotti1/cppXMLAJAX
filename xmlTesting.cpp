@@ -195,34 +195,6 @@ void getTriggers(XMLNode node)
             cout << "command : " << command << endl;
             cout << "print : " << triggerPrint << endl;
 
-            XMLNode triggerConditionNode = triggerNode.getChildNode("condition");
-            if (!triggerConditionNode.isEmpty())
-                {
-                    string hasCondition, objectCondition, ownerCondition = "";
-
-                    XMLNode hasConditionNode = triggerConditionNode.getChildNode("has");
-                    if (!hasConditionNode.isEmpty())
-                        {
-                        hasCondition = hasConditionNode.getText();
-                        }
-
-                    XMLNode objectConditionNode = triggerConditionNode.getChildNode("object");
-                    if (!objectConditionNode.isEmpty())
-                        {
-                        objectCondition = objectConditionNode.getText();
-                        }
-
-                    XMLNode ownerConditionNode = triggerConditionNode.getChildNode("owner");
-                    if (!ownerConditionNode.isEmpty())
-                        {
-                        ownerCondition = ownerConditionNode.getText();
-                        }
-
-                    cout << "(trigger condition information)" << endl;
-                    cout << "has : " << hasCondition << endl;
-                    cout << "object : " << objectCondition << endl;
-                    cout << "owner : " << ownerCondition << endl;
-                }
             cout << "condition information for trigger" << endl;
             getCondition(triggerNode);
         }
