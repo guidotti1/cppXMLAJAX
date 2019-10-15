@@ -87,7 +87,11 @@ int main (int argc, char ** argv) {
         {
 
         XMLNode itemNode = nextnode.getChildNode("item");
-        string itemName = itemNode.getText();
+        if (!itemNode.isEmpty())
+            {
+                string itemName = itemNode.getText();
+            }
+
 
         cout << "itemName " << itemName << endl;
 
