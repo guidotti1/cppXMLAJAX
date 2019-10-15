@@ -46,6 +46,7 @@ void getBorders (XMLNode);
 void getContainers(XMLNode);
 void getCreatures(XMLNode);
 void getCondition(XMLNode node);
+void getAttack(XMLNode node);
 
 
 int main (int argc, char ** argv) {
@@ -100,6 +101,8 @@ int main (int argc, char ** argv) {
     getContainers(roomNode);
     //get information for creatures in the room
     getCreatures(roomNode);
+
+
 
 
     roomNode=xMainNode.getChildNode(i++);
@@ -172,7 +175,7 @@ void getTriggers(XMLNode node)
     for (int nTriggers = 0; nTriggers < numberTriggers; nTriggers++)
         {
             XMLNode triggerNode=node.getChildNode("trigger", nTriggers);
-            string triggerType, command, triggerPrint = "";
+            string triggerType, command, triggerPrint, action = "";
 
             XMLNode typeNode = triggerNode.getChildNode("type");
             if (!typeNode.isEmpty())
@@ -181,21 +184,29 @@ void getTriggers(XMLNode node)
                 }
 
             XMLNode commandNode = triggerNode.getChildNode("command");
-                if (!commandNode.isEmpty())
+            if (!commandNode.isEmpty())
                 {
                 command = commandNode.getText();
                 }
 
             XMLNode printNode = triggerNode.getChildNode("print");
-                if (!printNode.isEmpty())
+            if (!printNode.isEmpty())
                 {
                 triggerPrint = printNode.getText();
                 }
+
+            XMLNode actionNode = triggerNode.getChildNode("action");
+            if (!actionNode.isEmpty())
+                {
+                action = actionNode.getText();
+                }
+
 
             cout << "(trigger information)" << endl;
             cout << "type : " << triggerType << endl;
             cout << "command : " << command << endl;
             cout << "print : " << triggerPrint << endl;
+            cout << "action : " << action << endl;
 
             cout << "condition information for trigger" << endl;
             getCondition(triggerNode);
@@ -290,14 +301,10 @@ void getCreatures(XMLNode node)
         cout << "(creature information)"<<endl;
         cout << "creature name : "<< creatureName << endl;
         cout << "creature vulnerability : " << creatureVulnerability << endl;
-
-        XMLNode attackNode = creatureNode.getChildNode("attack");
-        cout << "condition for attack " <<endl;
-        getCondition(attackNode);
-        cout << "trigger for attack " << endl;
+        cout << "attack for creature : " << endl;
+        getAttack(creatureNode);
+        cout << "trigger for creature : " << endl;
         getTriggers(attackNode);
-
-
         }
 }
 
@@ -340,6 +347,29 @@ void getCondition(XMLNode node)
             cout << "object : " << object << endl;
             cout << "status : " << status << endl;
             }
+}
+
+void getAttack(XMLNode node)
+{
+        XMLNode attackNode = node.getChildNode("attack");
+        cout << "condition for attack " <<endl;
+        getCondition(attackNode);
+
+        string print ="";
+        XMLNode printNode = attackNode.getChildNode("print");
+        if (!printNode.isEmpty())
+            {
+            print = printNode.getText();
+            }
+        int numberActions = attackNode.nChildNode("attack");
+        cout << "actions for attack " << endl;
+        for (int nActions = 0; nActions < numberActions; nActions ++)
+            {
+            XMLNode actionNode = node.getChildNode("action", nActions);
+            string actionInfo = actionNode.getText();
+            cout << "actionInfo " << actionInfo << endl;
+            }
+
 
 
 }
