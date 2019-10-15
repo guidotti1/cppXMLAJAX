@@ -83,7 +83,7 @@ int main (int argc, char ** argv) {
 
     //get information for item in the room
     int numberItems = roomNode.nChildNode("item");
-
+    cout << "numberItems " << numberItems << endl;
     for (int nItems = 0; nItems < numberItems; nItems++)
         {
             XMLNode itemNode = roomNode.getChildNode("item", nItems);
