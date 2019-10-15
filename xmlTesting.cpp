@@ -108,11 +108,11 @@ int main (int argc, char ** argv) {
     //get information for triggers in the room
     newRoom.getTriggers(roomNode);
     //get information for borders in the room
-    getBorders(roomNode);
+    //getBorders(roomNode);
     //get information for containers in the room
-    getContainers(roomNode);
+    //getContainers(roomNode);
     //get information for creatures in the room
-    getCreatures(roomNode);
+    //getCreatures(roomNode);
 
     roomNode=xMainNode.getChildNode(i++);
     } while (!roomNode.isEmpty());
