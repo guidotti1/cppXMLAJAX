@@ -101,16 +101,10 @@ int main (int argc, char ** argv) {
 
     do {
 
-
+    //room initializer
     room newRoom(roomNode);
-    //get information for room
-    //newRoom = getRoomInformation(roomNode);
-    //get information for items in the room
-    newRoom.getItems(roomNode);
-    //get information for triggers in the room
-    newRoom.getTriggers(roomNode);
-    //get information for borders in the room
-    newRoom.getBorders(roomNode);
+
+
     //get information for containers in the room
     //getContainers(roomNode);
     //get information for creatures in the room
