@@ -8,26 +8,7 @@
 
 using namespace std;
 
-class item
-{
-public:
-    item();
-    item(XMLNode node);
-    //void drop();
-    //void take();
-    //void read();
-    //void turnOn();
-    //void putInContainer(); //probably should pass the current owner and new owner (e.g. user to container)
 
-
-private:
-    string name;
-    string writing;
-    string status;
-    string owner;
-    //bool on;
-    //trigger itemTrigger;
-};
 
 class turnon
 {
@@ -40,25 +21,63 @@ private:
     string action;
 };
 
+
+class item
+{
+public:
+    item();
+    item(XMLNode node);
+    //void drop();
+    //void take();
+    //void read();
+    //void turnOn();
+    //void putInContainer(); //probably should pass the current owner and new owner (e.g. user to container)
+private:
+    string name;
+    string writing;
+    string status;
+    string owner;
+    turnon itemTurnon;
+    //bool on;
+    //trigger itemTrigger;
+};
+
+class trigger
+{
+public:
+    trigger();
+    trigger(XMLNode node);
+
+private :
+    string type;
+    string command;
+    string print;
+    string action;
+
+};
+
 class room
 {
 public :
     room();
     room(XMLNode node);
+    getItems(XMLNode node);
+    getTriggers(XMLNode node);
+
 
 private :
     string name;
     string description;
     string type;
     vector<item> items;
-
+    vector<trigger> triggers;
 };
 
 
 
 
 room getRoomInformation(XMLNode);
-void getItems(XMLNode);
+void getItems(XMLNode, vector<item> & items);
 void getTriggers(XMLNode);
 void getBorders (XMLNode);
 void getContainers(XMLNode);
@@ -85,7 +104,7 @@ int main (int argc, char ** argv) {
     //get information for room
     //newRoom = getRoomInformation(roomNode);
     //get information for items in the room
-    getItems(roomNode);
+    newRoom.getItems(roomNode);
     //get information for triggers in the room
     getTriggers(roomNode);
     //get information for borders in the room
@@ -102,7 +121,7 @@ int main (int argc, char ** argv) {
     return 0;
 }
 
-room :: room(XMLNode node)
+room::room(XMLNode node)
 {
     name, description, type = "";
     //room information
@@ -131,6 +150,9 @@ room :: room(XMLNode node)
     cout << "Name of the room is : " << name << endl;
     cout << "Description of the room is : " << description << endl;
     cout << "Type of the room is : " <<  type << endl;
+
+    getItems(node);
+    getTriggers(node);
 
 }
 
@@ -191,58 +213,64 @@ turnon::turnon(XMLNode node)
         }
 }
 
-
-void getItems(XMLNode node)
+room::getItems(XMLNode node)
 {
     int numberItems = node.nChildNode("item");
     for (int nItems = 0; nItems < numberItems; nItems++)
         {
         XMLNode itemNode = node.getChildNode("item", nItems);
         item newItem(itemNode);
+        items.push_back(newItem);
         }
 }
 
-void getTriggers(XMLNode node)
+
+trigger::trigger(XMLNode node)
+{
+    type, command, action, print = "";
+
+    XMLNode typeNode = node.getChildNode("type");
+    if (!typeNode.isEmpty())
+        {
+        type = typeNode.getText();
+        }
+
+    XMLNode commandNode = node.getChildNode("command");
+    if (!commandNode.isEmpty())
+        {
+        command = commandNode.getText();
+        }
+
+    XMLNode printNode = node.getChildNode("print");
+    if (!printNode.isEmpty())
+        {
+        print = printNode.getText();
+        }
+
+    XMLNode actionNode = node.getChildNode("action");
+    if (!actionNode.isEmpty())
+        {
+        action = actionNode.getText();
+        }
+
+    cout << "(trigger information)" << endl;
+    cout << "type : " << triggerType << endl;
+    cout << "command : " << command << endl;
+    cout << "print : " << triggerPrint << endl;
+    cout << "action : " << action << endl;
+
+    cout << "condition information for trigger" << endl;
+    getCondition(triggerNode);
+}
+
+room::getTriggers(XMLNode node)
 {
     int numberTriggers = node.nChildNode("trigger");
     for (int nTriggers = 0; nTriggers < numberTriggers; nTriggers++)
         {
             XMLNode triggerNode=node.getChildNode("trigger", nTriggers);
-            string triggerType, command, triggerPrint, action = "";
-
-            XMLNode typeNode = triggerNode.getChildNode("type");
-            if (!typeNode.isEmpty())
-                {
-                triggerType = typeNode.getText();
-                }
-
-            XMLNode commandNode = triggerNode.getChildNode("command");
-            if (!commandNode.isEmpty())
-                {
-                command = commandNode.getText();
-                }
-
-            XMLNode printNode = triggerNode.getChildNode("print");
-            if (!printNode.isEmpty())
-                {
-                triggerPrint = printNode.getText();
-                }
-
-            XMLNode actionNode = triggerNode.getChildNode("action");
-            if (!actionNode.isEmpty())
-                {
-                action = actionNode.getText();
-                }
-
-
-            cout << "(trigger information)" << endl;
-            cout << "type : " << triggerType << endl;
-            cout << "command : " << command << endl;
-            cout << "print : " << triggerPrint << endl;
-            cout << "action : " << action << endl;
-
-            cout << "condition information for trigger" << endl;
-            getCondition(triggerNode);
+            trigger newTrigger(triggerNode);
+            triggers.push_back(newTrigger);
         }
 }
 
