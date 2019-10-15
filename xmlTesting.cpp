@@ -186,7 +186,7 @@ item::item(XMLNode node)
 
     //turnon information for the item
     XMLNode turnonNode = node.getChildNode("turnon");
-    turnon itemTurnon(turnonNode);
+    turnon test(turnonNode);
 }
 
 turnon::turnon(XMLNode node)
@@ -259,8 +259,8 @@ trigger::trigger(XMLNode node)
     cout << "print : " << print << endl;
     cout << "action : " << action << endl;
 
-    cout << "condition information for trigger" << endl;
-    getCondition(node);
+    //cout << "condition information for trigger" << endl;
+    //getCondition(node);
 }
 
 void room::getTriggers(XMLNode node)
