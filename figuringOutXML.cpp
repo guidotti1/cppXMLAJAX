@@ -35,6 +35,9 @@ int main (int argc, char ** argv) {
 
     cout << "item1" << item1 << endl;
     cout << "item2" << item2 << endl;
+    
+    int number = roomNode.nChildNode("item");
+    cout << "NUMBER IS " << number << endl;
 
     roomNode=xMainNode.getChildNode(i++);
     } while (!roomNode.isEmpty());
