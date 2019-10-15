@@ -274,6 +274,7 @@ room::getTriggers(XMLNode node)
         }
 }
 
+/*
 void getBorders (XMLNode node)
 {
     int numberBorders = node.nChildNode("border");
@@ -436,3 +437,4 @@ void getAttack(XMLNode node)
 
 }
 
+*/
