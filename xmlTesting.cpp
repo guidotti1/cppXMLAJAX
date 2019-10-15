@@ -133,7 +133,7 @@ int main (int argc, char ** argv) {
 fuck::fuck()
 {
     fuckskon = "I HATE SKON SO FUCKING MUCH ";
-    cout << fuckson <<endl;
+    cout << fuckskon<<endl;
 }
 
 turnon::turnon(XMLNode node)
