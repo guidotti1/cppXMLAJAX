@@ -432,10 +432,12 @@ creature::creature(XMLNode node)
     cout << "creature name : "<< name << endl;
     cout << "creature vulnerability : " << vulnerability << endl;
     cout << "attack for creature : " << endl;
-    attack tempAttack(node);
+    XMLNode attackNode = node.getChildNode("attack");
+    attack tempAttack(attackNode);
     creatureAttack = tempAttack;
     cout << "trigger for creature : " << endl;
-    trigger tempTrigger(node);
+    XMLNode triggerNode = node.getChildNode("trigger");
+    trigger tempTrigger(triggerNode);
     creatureTrigger = tempTrigger;
 
 
