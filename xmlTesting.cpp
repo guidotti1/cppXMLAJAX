@@ -129,7 +129,9 @@ public :
     room();
     room(XMLNode node);
     void getBorders(XMLNode node);
-    void getContainers(XMLNode);
+    void getContainers(XMLNode node);
+    void getCreatures(XMLNode node);
+
 
 private :
     string name;
@@ -144,9 +146,6 @@ private :
 
 void getItems(XMLNode node, vector<item> & items);
 void getTriggers(XMLNode node, vector<trigger> & triggers);
-//void getCreatures(XMLNode);
-//void getCondition(XMLNode node);
-//void
 
 
 int main (int argc, char ** argv) {
@@ -282,7 +281,7 @@ item::item(XMLNode node)
 
 trigger::trigger()
 {
-    type, commmand, action, print = "";
+    type, command, action, print = "";
 
 }
 
@@ -433,7 +432,7 @@ creature::creature(XMLNode node)
     attack tempAttack(node);
     creatureAttack = tempAttack;
     cout << "trigger for creature : " << endl;
-    attack tempTrigger(node);
+    trigger tempTrigger(node);
     creatureTrigger = tempTrigger;
 
 
@@ -472,6 +471,8 @@ room::room(XMLNode node)
     getItems(node, items);
     getTriggers(node, triggers);
     getBorders(node);
+    getContainers(node);
+    getCreatures(node);
 
 }
 
