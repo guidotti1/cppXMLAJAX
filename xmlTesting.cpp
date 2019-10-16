@@ -530,7 +530,7 @@ void room::getCreatures(XMLNode node)
         {
         XMLNode creatureNode = node.getChildNode("creature", nCreatures);
         creature newCreature(creatureNode);
-        creatures.push_back(newCreature;
+        creatures.push_back(newCreature);
 
         }
 }
