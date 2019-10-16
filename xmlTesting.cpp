@@ -321,7 +321,7 @@ trigger::trigger(XMLNode node)
 
     cout << "condition information for trigger" << endl;
     XMLNode conditionNode = node.getChildNode("condition");
-    condition tempCondition(node);
+    condition tempCondition(conditionNode);
     triggerCondition = tempCondition;
 }
 
@@ -388,10 +388,6 @@ attack::attack()
 
 attack::attack(XMLNode node)
 {
-    cout << "condition for attack " <<endl;
-    XMLNode conditionNode = node.getChildNode("condition");
-    condition tempCondition(conditionNode);
-    attackCondition = tempCondition;
 
     print ="";
     XMLNode printNode = node.getChildNode("print");
@@ -408,6 +404,11 @@ attack::attack(XMLNode node)
         actions.push_back(actionInfo);
         cout << "actionInfo " << actionInfo << endl;
         }
+
+    cout << "condition for attack " <<endl;
+    XMLNode conditionNode = node.getChildNode("condition");
+    condition tempCondition(conditionNode);
+    attackCondition = tempCondition;
 
 }
 
