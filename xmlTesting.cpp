@@ -106,8 +106,6 @@ private:
     string print;
     vector<string> actions;
 
-
-
 };
 
 class creature
@@ -115,10 +113,13 @@ class creature
 public :
     creature();
     creature(XMLNode node);
+    void getAttack(XMLNode node);
 
 private :
     string name;
     string vulnerability;
+    attack creatureAttack;
+    trigger creatureTrigger;
 
 };
 
@@ -145,7 +146,7 @@ void getItems(XMLNode node, vector<item> & items);
 void getTriggers(XMLNode node, vector<trigger> & triggers);
 //void getCreatures(XMLNode);
 //void getCondition(XMLNode node);
-//void getAttack(XMLNode node);
+//void
 
 
 int main (int argc, char ** argv) {
@@ -275,10 +276,15 @@ item::item(XMLNode node)
 
     //turnon information for the item
     XMLNode turnonNode = node.getChildNode("turnon");
-    turnon test(turnonNode);
-    itemTurnon = test;
+    turnon tempTurnon(turnonNode);
+    itemTurnon = tempTurnon;
 }
 
+trigger::trigger()
+{
+    type, commmand, action, print = "";
+
+}
 
 trigger::trigger(XMLNode node)
 {
@@ -375,18 +381,46 @@ container::container(XMLNode node)
 
 }
 
+attack::attack()
+{
+    print = "";
+}
+
+attack::attack(XMLNode node)
+{
+    cout << "condition for attack " <<endl;
+    condition tempCondition(node);
+    attackCondition = tempCondition;
+
+    print ="";
+    XMLNode printNode = node.getChildNode("print");
+    if (!printNode.isEmpty())
+        {
+        print = printNode.getText();
+        }
+    int numberActions = node.nChildNode("attack");
+    cout << "actions for attack " << endl;
+    for (int nActions = 0; nActions < numberActions; nActions ++)
+        {
+        XMLNode actionNode = node.getChildNode("action", nActions);
+        string actionInfo = actionNode.getText();
+        actions.push_back(actionInfo);
+        cout << "actionInfo " << actionInfo << endl;
+        }
+
+}
 
 creature::creature(XMLNode node)
 {
     string name, vulnerability ="";
 
-    XMLNode creatureNameNode = creatureNode.getChildNode("name");
+    XMLNode creatureNameNode = node.getChildNode("name");
     if (!creatureNameNode.isEmpty())
         {
         name = creatureNameNode.getText();
         }
 
-    XMLNode creatureVulnerabilityNode = creatureNode.getChildNode("vulnerability");
+    XMLNode creatureVulnerabilityNode = node.getChildNode("vulnerability");
     if (!creatureVulnerabilityNode.isEmpty())
         {
         vulnerability = creatureVulnerabilityNode.getText();
@@ -396,9 +430,11 @@ creature::creature(XMLNode node)
     cout << "creature name : "<< name << endl;
     cout << "creature vulnerability : " << vulnerability << endl;
     cout << "attack for creature : " << endl;
-    getAttack(creatureNode);
+    attack tempAttack(node);
+    creatureAttack = tempAttack;
     cout << "trigger for creature : " << endl;
-    getTriggers(creatureNode);
+    attack tempTrigger(node);
+    creatureTrigger = tempTrigger;
 
 
 }
@@ -486,48 +522,16 @@ void room::getContainers(XMLNode node)
 }
 
 
-void getCreatures(XMLNode node)
+void room::getCreatures(XMLNode node)
 {
     int numberCreatures = node.nChildNode("creature");
     for (int nCreatures = 0; nCreatures < numberCreatures; nCreatures++)
         {
         XMLNode creatureNode = node.getChildNode("creature", nCreatures);
+        creature newCreature(creatureNode);
+        creatures.push_back(newCreature;
 
         }
 }
-/*
-void getCondition(XMLNode node)
-{
-    int numberConditions = node.nChildNode("condition");
-    for (int nConditions = 0; nConditions < numberConditions; nConditions++)
-        {
-            XMLNode conditionNode = node.getChildNode("condition", nConditions);
-
-}
-
-void getAttack(XMLNode node)
-{
-        XMLNode attackNode = node.getChildNode("attack");
-        cout << "condition for attack " <<endl;
-        getCondition(attackNode);
-
-        string print ="";
-        XMLNode printNode = attackNode.getChildNode("print");
-        if (!printNode.isEmpty())
-            {
-            print = printNode.getText();
-            }
-        int numberActions = attackNode.nChildNode("attack");
-        cout << "actions for attack " << endl;
-        for (int nActions = 0; nActions < numberActions; nActions ++)
-            {
-            XMLNode actionNode = node.getChildNode("action", nActions);
-            string actionInfo = actionNode.getText();
-            cout << "actionInfo " << actionInfo << endl;
-            }
 
 
-
-}
-
-*/
