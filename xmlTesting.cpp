@@ -242,7 +242,6 @@ condition::condition(XMLNode node)
     cout << "has : " << has << endl;
     cout << "object : " << object << endl;
     cout << "status : " << status << endl;
-    }
 }
 
 
