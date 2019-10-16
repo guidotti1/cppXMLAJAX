@@ -395,7 +395,7 @@ attack::attack(XMLNode node)
         {
         print = printNode.getText();
         }
-    int numberActions = node.nChildNode("attack");
+    int numberActions = node.nChildNode("action");
     cout << "actions for attack " << endl;
     for (int nActions = 0; nActions < numberActions; nActions ++)
         {
