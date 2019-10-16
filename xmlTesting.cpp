@@ -19,6 +19,18 @@ private:
     string action;
 };
 
+class condition
+{
+public:
+    condition();
+    condition(XMLNode node);
+
+private:
+    string object;
+    string status;
+    string has;
+    string owner;
+};
 
 class item
 {
@@ -51,6 +63,7 @@ private :
     string command;
     string print;
     string action;
+    condition triggerCondition
 
 };
 
@@ -60,6 +73,53 @@ public:
     border();
     border(XMLNode node);
 
+private :
+    string direction;
+    string name;
+
+};
+
+class container
+{
+public:
+    container();
+    container(XMLNode node);
+
+private :
+    string name;
+    string status;
+    string accept;
+    vector<item> items;
+    vector<trigger> triggers;
+
+};
+
+
+class attack
+{
+public:
+    attack();
+    attack(XMLNode node);
+
+private:
+    condition attackCondition;
+    string print;
+    vector<string> actions;
+
+
+
+};
+
+class creature
+{
+public :
+    creature();
+    creature(XMLNode node);
+
+private :
+    string name;
+    string vulnerability;
+
 };
 
 class room
@@ -67,10 +127,8 @@ class room
 public :
     room();
     room(XMLNode node);
-    void getItems(XMLNode node);
-    void getTriggers(XMLNode node);
     void getBorders(XMLNode node);
-
+    void getContainers(XMLNode);
 
 private :
     string name;
@@ -79,10 +137,12 @@ private :
     vector<item> items;
     vector<trigger> triggers;
     vector<border> borders;
+    vector<container> containers;
+    vector<creature> creatures;
 };
 
-
-void getContainers(XMLNode);
+void getItems(XMLNode node, vector<item> & items);
+void getTriggers(XMLNode node, vector<trigger> & triggers);
 void getCreatures(XMLNode);
 void getCondition(XMLNode node);
 void getAttack(XMLNode node);
@@ -103,8 +163,6 @@ int main (int argc, char ** argv) {
 
     //room initializer
     room newRoom(roomNode);
-
-
     //get information for containers in the room
     //getContainers(roomNode);
     //get information for creatures in the room
@@ -145,6 +203,48 @@ turnon::turnon(XMLNode node)
         cout << "Item turnon action : " << action << endl;
         }
 }
+
+condition::condition()
+{
+    object, status, owner, has = "";
+}
+
+condition::condition(XMLNode node)
+{
+    object, status, owner, has = "";
+
+    XMLNode hasNode = node.getChildNode("has");
+    if (!hasNode.isEmpty())
+        {
+        has = hasNode.getText();
+        }
+
+    XMLNode ownerNode = node.getChildNode("owner");
+    if (!ownerNode.isEmpty())
+        {
+        owner = ownerNode.getText();
+        }
+
+    XMLNode objectNode = node.getChildNode("object");
+    if (!objectNode.isEmpty())
+        {
+        object = objectNode.getText();
+        }
+
+    XMLNode statusNode = node.getChildNode("status");
+    if (!statusNode.isEmpty())
+        {
+        status = statusNode.getText();
+        }
+
+    cout << "(condition information)"<<endl;
+    cout << "owner : " << owner << endl;
+    cout << "has : " << has << endl;
+    cout << "object : " << object << endl;
+    cout << "status : " << status << endl;
+    }
+}
+
 
 item::item(XMLNode node)
 {
@@ -215,29 +315,92 @@ trigger::trigger(XMLNode node)
     cout << "print : " << print << endl;
     cout << "action : " << action << endl;
 
-    //cout << "condition information for trigger" << endl;
-    //getCondition(node);
+    cout << "condition information for trigger" << endl;
+    condition tempCondition(node);
+    triggerCondition = tempCondition;
 }
 
 border::border(XMLNode node)
 {
-    string borderDirection, borderName = "";
+    direction, name = "";
 
     XMLNode borderDirectionNode = node.getChildNode("direction");
     if (!borderDirectionNode.isEmpty())
         {
-        borderDirection = borderDirectionNode.getText();
+        direction = borderDirectionNode.getText();
         }
 
     XMLNode borderNameNode = node.getChildNode("name");
     if (!borderNameNode.isEmpty())
         {
-        borderName = borderNameNode.getText();
+        name = borderNameNode.getText();
         }
 
     cout << "(border information)"<<endl;
-    cout << "direction : " << borderDirection << endl;
-    cout << "name : " << borderName << endl;
+    cout << "direction : " << direction << endl;
+    cout << "name : " << name << endl;
+}
+
+container::container(XMLNode node)
+{
+    string name, status, accept = "";
+
+    XMLNode containerNameNode = node.getChildNode("name");
+    if (!containerNameNode.isEmpty())
+        {
+        name = containerNameNode.getText();
+        }
+
+    XMLNode containerStatusNode = containerNode.getChildNode("status");
+    if (!containerStatusNode.isEmpty())
+        {
+        status = containerStatusNode.getText();
+        }
+
+    XMLNode containerAcceptNode = containerNode.getChildNode("accept");
+    if (!containerAcceptNode.isEmpty())
+        {
+        accept = containerAcceptNode.getText();
+        }
+
+    cout << "(container information)"<<endl;
+    cout << "container name : " << name << endl;
+    cout << "container status : " << status << endl;
+    cout << "container accept :" << accept << endl;
+
+    cout << "(items in container)" << endl;
+    getItems(containerNode, items);
+
+    cout << "(triggers for container)" << endl;
+    getTriggers(containerNode, triggers);
+
+}
+
+
+creature::creature(XMLNode node)
+{
+    string name, vulnerability ="";
+
+    XMLNode creatureNameNode = creatureNode.getChildNode("name");
+    if (!creatureNameNode.isEmpty())
+        {
+        name = creatureNameNode.getText();
+        }
+
+    XMLNode creatureVulnerabilityNode = creatureNode.getChildNode("vulnerability");
+    if (!creatureVulnerabilityNode.isEmpty())
+        {
+        vulnerability = creatureVulnerabilityNode.getText();
+        }
+
+    cout << "(creature information)"<<endl;
+    cout << "creature name : "<< name << endl;
+    cout << "creature vulnerability : " << vulnerability << endl;
+    cout << "attack for creature : " << endl;
+    getAttack(creatureNode);
+    cout << "trigger for creature : " << endl;
+    getTriggers(creatureNode);
+
 
 }
 
@@ -271,13 +434,13 @@ room::room(XMLNode node)
     cout << "Description of the room is : " << description << endl;
     cout << "Type of the room is : " <<  type << endl;
 
-    getItems(node);
-    getTriggers(node);
+    getItems(node, items);
+    getTriggers(node, triggers);
     getBorders(node);
 
 }
 
-void room::getItems(XMLNode node)
+void getItems(XMLNode node, vector<item> & items)
 {
     int numberItems = node.nChildNode("item");
     for (int nItems = 0; nItems < numberItems; nItems++)
@@ -288,7 +451,7 @@ void room::getItems(XMLNode node)
         }
 }
 
-void room::getTriggers(XMLNode node)
+void getTriggers(XMLNode node, vector<item> & triggers)
 {
     int numberTriggers = node.nChildNode("trigger");
     for (int nTriggers = 0; nTriggers < numberTriggers; nTriggers++)
@@ -311,46 +474,18 @@ void room::getBorders (XMLNode node)
         }
 }
 
-/*
-void getContainers(XMLNode node)
+
+void room::getContainers(XMLNode node)
 {
     int numberContainers = node.nChildNode("container");
     for (int nContainers = 0; nContainers < numberContainers; nContainers++)
         {
         XMLNode containerNode = node.getChildNode("container", nContainers);
-        string containerName, containerStatus, containerAccept= "";
-
-        XMLNode containerNameNode = containerNode.getChildNode("name");
-        if (!containerNameNode.isEmpty())
-            {
-            containerName = containerNameNode.getText();
-            }
-
-        XMLNode containerStatusNode = containerNode.getChildNode("status");
-        if (!containerStatusNode.isEmpty())
-            {
-            containerStatus = containerStatusNode.getText();
-            }
-
-        XMLNode containerAcceptNode = containerNode.getChildNode("accept");
-        if (!containerAcceptNode.isEmpty())
-            {
-            containerAccept = containerAcceptNode.getText();
-            }
-
-        cout << "(container information)"<<endl;
-        cout << "container name : " << containerName << endl;
-        cout << "container status : " << containerStatus << endl;
-        cout << "container accept :" << containerAccept << endl;
-
-        cout << "(items in container)" << endl;
-        getItems(containerNode);
-
-        cout << "(triggers for container)" << endl;
-        getTriggers(containerNode);
+        container newContainer(containerNode);
+        containers.push_back(newContainer);
         }
-
 }
+
 
 void getCreatures(XMLNode node)
 {
@@ -358,69 +493,17 @@ void getCreatures(XMLNode node)
     for (int nCreatures = 0; nCreatures < numberCreatures; nCreatures++)
         {
         XMLNode creatureNode = node.getChildNode("creature", nCreatures);
-        string creatureName, creatureVulnerability ="";
 
-        XMLNode creatureNameNode = creatureNode.getChildNode("name");
-        if (!creatureNameNode.isEmpty())
-            {
-            creatureName = creatureNameNode.getText();
-            }
-
-        XMLNode creatureVulnerabilityNode = creatureNode.getChildNode("vulnerability");
-        if (!creatureVulnerabilityNode.isEmpty())
-            {
-            creatureVulnerability = creatureVulnerabilityNode.getText();
-            }
-
-        cout << "(creature information)"<<endl;
-        cout << "creature name : "<< creatureName << endl;
-        cout << "creature vulnerability : " << creatureVulnerability << endl;
-        cout << "attack for creature : " << endl;
-        getAttack(creatureNode);
-        cout << "trigger for creature : " << endl;
-        getTriggers(creatureNode);
         }
 }
-
+/*
 void getCondition(XMLNode node)
 {
     int numberConditions = node.nChildNode("condition");
     for (int nConditions = 0; nConditions < numberConditions; nConditions++)
         {
             XMLNode conditionNode = node.getChildNode("condition", nConditions);
-            string object, status, has, owner = "";
 
-
-            XMLNode hasNode = conditionNode.getChildNode("has");
-            if (!hasNode.isEmpty())
-                {
-                has = hasNode.getText();
-                }
-
-            XMLNode ownerNode = conditionNode.getChildNode("owner");
-            if (!ownerNode.isEmpty())
-                {
-                owner = ownerNode.getText();
-                }
-
-            XMLNode objectNode = conditionNode.getChildNode("object");
-            if (!objectNode.isEmpty())
-                {
-                object = objectNode.getText();
-                }
-
-            XMLNode statusNode = conditionNode.getChildNode("status");
-            if (!statusNode.isEmpty())
-                {
-                status = statusNode.getText();
-                }
-
-            cout << "(condition information)"<<endl;
-            cout << "owner : " << owner << endl;
-            cout << "has : " << has << endl;
-            cout << "object : " << object << endl;
-            cout << "status : " << status << endl;
-            }
 }
 
 void getAttack(XMLNode node)
