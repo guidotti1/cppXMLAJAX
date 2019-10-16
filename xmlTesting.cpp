@@ -143,9 +143,9 @@ private :
 
 void getItems(XMLNode node, vector<item> & items);
 void getTriggers(XMLNode node, vector<trigger> & triggers);
-void getCreatures(XMLNode);
-void getCondition(XMLNode node);
-void getAttack(XMLNode node);
+//void getCreatures(XMLNode);
+//void getCondition(XMLNode node);
+//void getAttack(XMLNode node);
 
 
 int main (int argc, char ** argv) {
@@ -350,13 +350,13 @@ container::container(XMLNode node)
         name = containerNameNode.getText();
         }
 
-    XMLNode containerStatusNode = containerNode.getChildNode("status");
+    XMLNode containerStatusNode = node.getChildNode("status");
     if (!containerStatusNode.isEmpty())
         {
         status = containerStatusNode.getText();
         }
 
-    XMLNode containerAcceptNode = containerNode.getChildNode("accept");
+    XMLNode containerAcceptNode = node.getChildNode("accept");
     if (!containerAcceptNode.isEmpty())
         {
         accept = containerAcceptNode.getText();
@@ -368,10 +368,10 @@ container::container(XMLNode node)
     cout << "container accept :" << accept << endl;
 
     cout << "(items in container)" << endl;
-    getItems(containerNode, items);
+    getItems(node, items);
 
     cout << "(triggers for container)" << endl;
-    getTriggers(containerNode, triggers);
+    getTriggers(node, triggers);
 
 }
 
@@ -450,7 +450,7 @@ void getItems(XMLNode node, vector<item> & items)
         }
 }
 
-void getTriggers(XMLNode node, vector<item> & triggers)
+void getTriggers(XMLNode node, vector<trigger> & triggers)
 {
     int numberTriggers = node.nChildNode("trigger");
     for (int nTriggers = 0; nTriggers < numberTriggers; nTriggers++)
