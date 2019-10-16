@@ -348,7 +348,7 @@ border::border(XMLNode node)
 
 container::container(XMLNode node)
 {
-    string name, status, accept = "";
+    name, status, accept = "";
 
     XMLNode containerNameNode = node.getChildNode("name");
     if (!containerNameNode.isEmpty())
@@ -414,7 +414,7 @@ attack::attack(XMLNode node)
 
 creature::creature(XMLNode node)
 {
-    string name, vulnerability ="";
+    name, vulnerability ="";
 
     XMLNode creatureNameNode = node.getChildNode("name");
     if (!creatureNameNode.isEmpty())
