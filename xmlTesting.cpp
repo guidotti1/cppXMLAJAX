@@ -63,7 +63,7 @@ private :
     string command;
     string print;
     string action;
-    condition triggerCondition
+    condition triggerCondition;
 
 };
 
